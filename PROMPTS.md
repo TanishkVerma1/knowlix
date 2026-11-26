@@ -126,4 +126,9 @@ The prompts Knowlix itself sends to its AI roles at runtime are a separate thing
 
     Also fixed from this prompt: a reference pasted with a line break in the middle was being split in two. A journal line ("Econometrica, 47(2), 263–291.") now stays with the reference above it, letter labels ("A.", "B.") are read as list labels, and a DOI cut in two by a line break is joined back together.
 
-20. _Add any further prompt used during the 90 minutes here._
+20. **Pasting the whole pack at once.**
+    > "also what if i pasted all the links given in the document as it is together will it be able to give reviews of each link at one go or not?"
+
+    What came out of it: yes. All eight references pasted together on the Home page come back as eight cards, each with its own status. Testing this showed one more problem: when the heading line ("References, exactly as the student pasted them:") or the page footer a browser prints on a PDF was copied along with the list, the split went wrong. Both are now recognised and ignored, with a unit test.
+
+21. _Add any further prompt used during the 90 minutes here._
