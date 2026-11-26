@@ -1,6 +1,8 @@
 import "server-only";
 import type { CslItem } from "@/shared/types";
 import type { CitationStyleId } from "@/shared/policy";
+import { apaSentenceCase } from "@/shared/sentence-case";
+import { bibliographyEntries, entriesToHtml } from "@/shared/rich-refs";
 
 /**
  * citation-js + CSL styles. Seam: add a style by dropping its CSL XML into
@@ -46,11 +48,15 @@ const TEMPLATE: Record<CitationStyleId, string> = {
   vancouver: "vancouver",
 };
 
-function clean(items: CslItem[]): CslItem[] {
+function clean(items: CslItem[], style?: CitationStyleId): CslItem[] {
   return items.map((it, i) => {
     // citation-js dislikes our private fields; keep standard CSL only.
     const rest: CslItem & { openalex?: string } = { ...it };
     delete rest.openalex;
+    // A catalogue page is where the record was found, not where the book is read: styles should not print it.
+    if (typeof rest.URL === "string" && /openlibrary\.org|books\.google\./i.test(rest.URL)) delete rest.URL;
+    // APA 7 sets titles in sentence case. The style file cannot do that, so it is done here.
+    if (style === "apa" && typeof rest.title === "string") rest.title = apaSentenceCase(rest.title);
     return { ...rest, id: rest.id || `item-${i}` };
   });
 }
@@ -58,15 +64,38 @@ function clean(items: CslItem[]): CslItem[] {
 export async function formatBibliography(items: CslItem[], style: CitationStyleId, format: "text" | "html" = "text"): Promise<string> {
   if (!items.length) return "";
   const { Cite } = await loadCitationJs();
-  const cite = new Cite(clean(items));
+  const cite = new Cite(clean(items, style));
   return cite.format("bibliography", { format, style: TEMPLATE[style], lang: "en-US" }) as string;
+}
+
+/** The bibliography with its italics, as safe HTML: one <p> per reference, in the style's order. */
+export async function formatBibliographyHtml(items: CslItem[], style: CitationStyleId): Promise<string> {
+  if (!items.length) return "";
+  try {
+    return entriesToHtml(bibliographyEntries(await formatBibliography(items, style, "html")).map((e) => e.html));
+  } catch {
+    return "";
+  }
+}
+
+/** One formatted entry per item with its italics, in the same order as the items. */
+export async function formatEachHtml(items: CslItem[], style: CitationStyleId): Promise<string[]> {
+  const { Cite } = await loadCitationJs();
+  return clean(items, style).map((it) => {
+    try {
+      const html = new Cite([it]).format("bibliography", { format: "html", style: TEMPLATE[style], lang: "en-US" }) as string;
+      return bibliographyEntries(html)[0]?.html ?? "";
+    } catch {
+      return "";
+    }
+  });
 }
 
 /** One formatted entry per item, in the same order (for per-card "Copy citation"). */
 export async function formatEach(items: CslItem[], style: CitationStyleId): Promise<string[]> {
   const { Cite } = await loadCitationJs();
   return Promise.all(
-    clean(items).map(async (it) => {
+    clean(items, style).map(async (it) => {
       try {
         return (new Cite([it]).format("bibliography", { format: "text", style: TEMPLATE[style], lang: "en-US" }) as string).trim();
       } catch {
@@ -78,7 +107,7 @@ export async function formatEach(items: CslItem[], style: CitationStyleId): Prom
 
 export async function formatInText(items: CslItem[], style: CitationStyleId): Promise<string> {
   const { Cite } = await loadCitationJs();
-  return new Cite(clean(items)).format("citation", { format: "text", style: TEMPLATE[style], lang: "en-US" }) as string;
+  return new Cite(clean(items, style)).format("citation", { format: "text", style: TEMPLATE[style], lang: "en-US" }) as string;
 }
 
 export async function toBibtex(items: CslItem[]): Promise<string> {

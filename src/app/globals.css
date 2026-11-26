@@ -250,6 +250,16 @@ h3 {
 }
 
 /* The register rule: a heavy rule and a guilloche braid, as on the head of an official record. */
+/* A formatted reference list: hanging indent, as the citation styles print it. */
+.reference-list p {
+  margin: 0 0 0.7em;
+  padding-left: 2em;
+  text-indent: -2em;
+}
+.reference-list p:last-child {
+  margin-bottom: 0;
+}
+
 .register-rule {
   display: flex;
   align-items: center;

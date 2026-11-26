@@ -90,7 +90,7 @@ docker compose --profile offline up -d ollama   # optional: offline AI (see dock
 
 ```bash
 npm run typecheck
-npm test                       # 154 unit tests: parser, scoring, guardrails, claim checks, source clients, append-only log, full agent pipeline (mock AI)
+npm test                       # 163 unit tests: parser, scoring, guardrails, claim checks, source clients, append-only log, full agent pipeline (mock AI)
 npm run smoke -- http://localhost:3000   # end-to-end checks against a running app (any URL)
 npm run bench -- holdout       # Lock 1 accuracy on the hand-written held-out set
 npm run bench:generated        # Lock 1 accuracy on the large generated set (about 15 minutes)

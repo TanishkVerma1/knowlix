@@ -9,7 +9,7 @@ import { verifyReference } from "../verify/verify";
 import { recordColumns, recordForResult } from "./records";
 import { openAlexByDoi, openAlexByIds, openAlexCitedBy, openAlexToCsl, type OpenAlexWork } from "../scholarly/openalex";
 import { UpstreamError } from "../scholarly/http";
-import { formatBibliography, formatEach, formatInText } from "../cite/citeproc";
+import { formatBibliography, formatBibliographyHtml, formatEach, formatInText } from "../cite/citeproc";
 import type { CitationStyleId } from "@/shared/policy";
 import type { CslItem, FlagInfo, RecordStatus, VerificationResult } from "@/shared/types";
 
@@ -168,8 +168,8 @@ export async function getItems(ctx: WorkspaceCtx, ids: string[]) {
 export async function cite(ctx: WorkspaceCtx, ids: string[], style: CitationStyleId) {
   const items = await getItems(ctx, ids);
   const csl = items.map((i, n) => ({ ...i.csl, id: `item-${n + 1}` }));
-  const [entries, bibliography, inText] = await Promise.all([formatEach(csl, style), formatBibliography(csl, style, "text"), formatInText(csl, style).catch(() => "")]);
-  return { entries: items.map((i, n) => ({ id: i.id, text: entries[n] })), bibliography, inText };
+  const [entries, bibliography, inText, bibliographyHtml] = await Promise.all([formatEach(csl, style), formatBibliography(csl, style, "text"), formatInText(csl, style).catch(() => ""), formatBibliographyHtml(csl, style)]);
+  return { entries: items.map((i, n) => ({ id: i.id, text: entries[n] })), bibliography, bibliographyHtml, inText };
 }
 
 /* ───────────── Folders ───────────── */

@@ -8,7 +8,8 @@ import { verifyReference } from "../verify/verify";
 import { tryLog } from "../audit/activity";
 import { ApiError } from "../http/api";
 import { isStudentVersion, recordColumns, recordForResult } from "./records";
-import { formatBibliography, formatEach, toBibtex, toRis } from "../cite/citeproc";
+import { formatBibliography, formatBibliographyHtml, formatEach, formatEachHtml, toBibtex, toRis } from "../cite/citeproc";
+import { entriesToHtml, escapeHtml } from "@/shared/rich-refs";
 import type { CitationStyleId } from "@/shared/policy";
 import type { CslItem, RecordStatus, VerificationResult } from "@/shared/types";
 import { SAMPLE_REFERENCE_LIST } from "./samples";
@@ -270,13 +271,23 @@ const NUMBERED: CitationStyleId[] = ["ieee", "vancouver"];
  * wrote it: re-formatting an unconfirmed reference from a best-guess parse
  * could change it.
  */
-async function formattedList(records: CslItem[], asWritten: (string | null)[], style: CitationStyleId): Promise<string> {
-  if (!records.length) return "";
-  if (!asWritten.some(Boolean)) return formatBibliography(records, style, "text");
-  const each = await formatEach(records, style);
-  const lines = each.map((e, i) => asWritten[i] ?? e.replace(/^\s*(?:\[\d+\]|\d+\.)\s*/, ""));
-  if (NUMBERED.includes(style)) return lines.map((l, i) => (style === "ieee" ? `[${i + 1}] ${l}` : `${i + 1}. ${l}`)).join("\n");
-  return [...lines].sort((a, b) => a.localeCompare(b, "en", { sensitivity: "base" })).join("\n");
+async function formattedList(records: CslItem[], asWritten: (string | null)[], style: CitationStyleId): Promise<{ text: string; html: string }> {
+  if (!records.length) return { text: "", html: "" };
+  if (!asWritten.some(Boolean)) {
+    const [text, html] = await Promise.all([formatBibliography(records, style, "text"), formatBibliographyHtml(records, style)]);
+    return { text, html };
+  }
+  const [each, eachHtml] = await Promise.all([formatEach(records, style), formatEachHtml(records, style)]);
+  const unnumber = (e: string) => e.replace(/^\s*(?:\[\d+\]|\d+\.)\s*/, "");
+  // Each line keeps its plain text and its italic version together, so sorting cannot separate them.
+  const lines = each.map((e, i) => ({ text: asWritten[i] ?? unnumber(e), html: asWritten[i] ? escapeHtml(asWritten[i]!) : unnumber(eachHtml[i] || escapeHtml(e)) }));
+  const ordered = NUMBERED.includes(style)
+    ? lines.map((l, i) => {
+        const n = style === "ieee" ? `[${i + 1}] ` : `${i + 1}. `;
+        return { text: n + l.text, html: n + l.html };
+      })
+    : [...lines].sort((a, b) => a.text.localeCompare(b.text, "en", { sensitivity: "base" }));
+  return { text: ordered.map((l) => l.text).join("\n"), html: entriesToHtml(ordered.map((l) => l.html)) };
 }
 
 export async function exportAudit(ctx: WorkspaceCtx, auditId: string, style: CitationStyleId, format: "text" | "bibtex" | "ris" | "csl") {
@@ -289,10 +300,11 @@ export async function exportAudit(ctx: WorkspaceCtx, auditId: string, style: Cit
     throw new ApiError(423, "export-locked", `Export is locked: ${audit.summary.blocking} reference${audit.summary.blocking > 1 ? "s are" : " is"} proven wrong. Replace or remove ${audit.summary.blocking > 1 ? "them" : "it"} first.`, { blocking: audit.summary.blocking });
   }
   let content: string;
+  let html = "";
   if (format === "bibtex") content = await toBibtex(records);
   else if (format === "ris") content = await toRis(records);
   else if (format === "csl") content = JSON.stringify(records, null, 2);
-  else content = await formattedList(records, asWritten, style);
+  else ({ text: content, html } = await formattedList(records, asWritten, style));
   const asIs = asWritten.filter(Boolean).length;
   await tryLog(ctx.db, ctx.workspaceId, {
     actor: "student",
@@ -301,7 +313,7 @@ export async function exportAudit(ctx: WorkspaceCtx, auditId: string, style: Cit
     subjectId: auditId,
     summary: `Exported ${records.length} references as ${format === "text" ? style.toUpperCase() : format.toUpperCase()}.${duplicates ? ` ${duplicates} duplicate${duplicates > 1 ? "s were" : " was"} left out.` : ""}${asIs && format === "text" ? ` ${asIs} unconfirmed reference${asIs > 1 ? "s are" : " is"} printed as written.` : ""}`,
   });
-  return { content, count: records.length, summary: audit.summary, duplicates, asWritten: asIs };
+  return { content, html, count: records.length, summary: audit.summary, duplicates, asWritten: asIs };
 }
 
 export async function saveAuditToLibrary(ctx: WorkspaceCtx, auditId: string, folderId: string | null) {

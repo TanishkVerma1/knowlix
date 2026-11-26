@@ -10,6 +10,7 @@ import type { VerificationResult, RecordStatus, CslItem } from "@/shared/types";
 import { trustLabel } from "@/shared/labels";
 import { referenceListStatement } from "@/shared/statement";
 import { TrustLegend } from "@/components/ui/trust-legend";
+import { ReferenceList, copyReferences, downloadForWord } from "@/components/ui/references";
 import { CITATION_STYLES, type CitationStyleId } from "@/shared/policy";
 import { api, errorMessage } from "@/lib/api";
 import { useSession } from "@/lib/session";
@@ -54,6 +55,7 @@ export function LibraryView() {
   const [citeOpen, setCiteOpen] = React.useState(false);
   const [citeChoice, setCiteStyle] = React.useState<CitationStyleId | null>(null);
   const [citeOut, setCiteOut] = React.useState<string | null>(null);
+  const [citeHtml, setCiteHtml] = React.useState("");
   const policy = session.data?.policy;
 
   const citeStyle: CitationStyleId = citeChoice ?? policy?.defaultStyle ?? "apa";
@@ -95,8 +97,11 @@ export function LibraryView() {
   });
 
   const cite = useMutation({
-    mutationFn: () => api<{ bibliography: string }>("/api/cite", { body: { ids: [...selected], style: citeStyle } }),
-    onSuccess: (r) => setCiteOut(r.bibliography),
+    mutationFn: () => api<{ bibliography: string; bibliographyHtml?: string }>("/api/cite", { body: { ids: [...selected], style: citeStyle } }),
+    onSuccess: (r) => {
+      setCiteOut(r.bibliography);
+      setCiteHtml(r.bibliographyHtml ?? "");
+    },
     onError: (e) => toast.error(errorMessage(e)),
   });
 
@@ -351,12 +356,17 @@ export function LibraryView() {
         footer={
           citeOut ? (
             <>
-              <Button variant="secondary" onClick={async () => (await copyText(citeOut)) && toast.success("Copied")}>
+              <Button variant="secondary" onClick={async () => (await copyReferences(citeHtml, citeOut)) && toast.success(citeHtml ? "Copied with italics" : "Copied")}>
                 <Copy className="size-4" aria-hidden /> Copy
               </Button>
-              <Button variant="primary" onClick={() => download(`references-${citeStyle}.txt`, citeOut)}>
-                <Download className="size-4" aria-hidden /> Download
+              <Button variant="secondary" onClick={() => download(`references-${citeStyle}.txt`, citeOut)}>
+                <Download className="size-4" aria-hidden /> Text (.txt)
               </Button>
+              {citeHtml ? (
+                <Button variant="primary" onClick={() => downloadForWord(citeHtml, `references-${citeStyle}`)}>
+                  <Download className="size-4" aria-hidden /> Word (.rtf)
+                </Button>
+              ) : null}
             </>
           ) : null
         }
@@ -377,7 +387,7 @@ export function LibraryView() {
             {plural(items.filter((i) => selected.has(i.id) && i.status !== "verified").length, "selected reference")} could not be fully confirmed. Check before submitting.
           </Notice>
         ) : null}
-        {citeOut ? <pre className="mt-4 max-h-[45vh] overflow-auto whitespace-pre-wrap [overflow-wrap:anywhere] rounded-xl border border-rule bg-paper p-4 font-record text-[0.88rem] leading-relaxed text-ink">{citeOut}</pre> : null}
+        {citeOut ? <ReferenceList html={citeHtml} text={citeOut} className="mt-4" /> : null}
         {citeOut ? (
           <div className="mt-4">
             <div className="flex flex-wrap items-center justify-between gap-2">

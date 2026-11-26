@@ -106,4 +106,19 @@ The prompts Knowlix itself sends to its AI roles at runtime are a separate thing
     | 5. AI use statement | Generated at the end of a research run from what actually happened. | The same kind of statement now comes with every reference-list export (audit and library), with its own copy button. | A student who only checks a list, and never runs the research assistant, still needs a statement. |
     | Phone screen | Responsive layout with a drawer menu. | The label guide folds away on a phone; the cite dialog no longer clips. Checked in a browser at 390 px wide: no sideways scrolling on the home, library, audit, sources or summary screens. | The judges may open the site on a phone. |
 
-20. _Add any further prompt used during the 90 minutes here._
+20. **Is it really finished?**
+    > "is the phase 2 implemented perfectly and not missing anythin or doesnt have any flaws"
+
+    What came out of it: a harder test with twenty trick inputs found three flaws, now fixed. A real title typed on its own was stamped Not found although its record had been found (it now says Please check and offers the official record; a title alone never earns Verified). Very short made-up titles were skipped instead of searched. An uploaded PDF was approved without a click.
+
+21. **A demo script.**
+    > "if i am giving a demo of this project what all do i need to show demo like a demo link that is wron, a demo link that is correct, etc. so i want you to give me a document consisting everything that is required to give the perfect and complete demo of the project."
+
+    > "also go ahead and create speaking notes for the demo project as it requires us to do in the phase 2."
+
+22. **APA 7 done properly.**
+    > "fix the apa 7 italics and title case also and i didnt understand the point a not found reference can still be kept. so please explain me that"
+
+    What came out of it: in APA 7th edition, titles are now set in sentence case (acronyms, mixed-case words and common proper nouns are kept), journal names and volumes are italic on screen, Copy carries the italics into a word processor, and a new download opens in Word with the hanging indent and double spacing APA asks for.
+
+23. _Add any further prompt used during the 90 minutes here._

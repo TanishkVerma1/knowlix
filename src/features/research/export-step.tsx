@@ -8,11 +8,12 @@ import { Copy, Download, ScrollText, CircleCheck } from "lucide-react";
 import type { RunDTO } from "@/server/services/research";
 import { CITATION_STYLES, type CitationStyleId } from "@/shared/policy";
 import { api } from "@/lib/api";
-import { copyText, download, stampDate } from "@/lib/utils";
+import { download, stampDate } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Label, Select, Textarea } from "@/components/ui/field";
 import { Skeleton } from "@/components/ui/misc";
 import { useAiCalls } from "./ai-calls";
+import { ReferenceList, copyRich, downloadForWord, paragraphsForPaste, referencesForPaste } from "@/components/ui/references";
 
 export function buildAiUseStatement(run: RunDTO, models: string[]): string {
   const st = run.draft?.stats;
@@ -39,7 +40,7 @@ export function buildAiUseStatement(run: RunDTO, models: string[]): string {
 
 export function ExportStep({ run, defaultStyle }: { run: RunDTO; defaultStyle: CitationStyleId }) {
   const [style, setStyle] = React.useState<CitationStyleId>(defaultStyle);
-  const exp = useQuery({ queryKey: ["run-export", run.id, style], queryFn: () => api<{ summary: string; references: string }>(`/api/research/${run.id}/export?style=${style}`) });
+  const exp = useQuery({ queryKey: ["run-export", run.id, style], queryFn: () => api<{ summary: string; references: string; referencesHtml?: string }>(`/api/research/${run.id}/export?style=${style}`) });
   const calls = useAiCalls(run.id, run.mode === "ai");
   const models = [...new Set((calls.data?.calls ?? []).filter((c) => c.ok).map((c) => `${c.model} via ${c.provider}`))];
   const [statement, setStatement] = React.useState<string | null>(null);
@@ -77,7 +78,7 @@ export function ExportStep({ run, defaultStyle }: { run: RunDTO; defaultStyle: C
             <div className="max-h-[28rem] overflow-auto whitespace-pre-wrap rounded-xl border border-rule bg-paper p-4 font-sans text-[1rem] leading-relaxed text-ink">{exp.data.summary}</div>
             <div>
               <h3 className="text-[0.9rem] font-bold text-ink">References</h3>
-              <pre className="mt-2 whitespace-pre-wrap [overflow-wrap:anywhere] rounded-xl border border-rule bg-paper p-4 font-record text-[0.88rem] leading-relaxed text-ink">{exp.data.references}</pre>
+              <ReferenceList html={exp.data.referencesHtml} text={exp.data.references} className="mt-2 max-h-none" />
             </div>
           </div>
         ) : (
@@ -96,7 +97,9 @@ export function ExportStep({ run, defaultStyle }: { run: RunDTO; defaultStyle: C
           variant="primary"
           disabled={!exp.data}
           onClick={async () => {
-            if (await copyText(full)) toast.success("Summary, references and statement copied");
+            const refs = exp.data?.referencesHtml;
+            const rich = refs && exp.data ? `${paragraphsForPaste(exp.data.summary)}${paragraphsForPaste("References")}${referencesForPaste(refs)}${paragraphsForPaste(`AI-use statement\n\n${text}`)}` : "";
+            if (await copyRich(rich, full)) toast.success("Summary, references and statement copied");
           }}
         >
           <Copy className="size-4" aria-hidden /> Copy everything
@@ -104,6 +107,11 @@ export function ExportStep({ run, defaultStyle }: { run: RunDTO; defaultStyle: C
         <Button variant="secondary" disabled={!exp.data} onClick={() => download("knowlix-summary.txt", full)}>
           <Download className="size-4" aria-hidden /> Download .txt
         </Button>
+        {exp.data?.referencesHtml ? (
+          <Button variant="secondary" onClick={() => downloadForWord(exp.data!.referencesHtml!, "knowlix-references")}>
+            <Download className="size-4" aria-hidden /> References for Word (.rtf)
+          </Button>
+        ) : null}
         <Button variant="secondary" asChild>
           <Link href={`/receipts/run/${run.id}`}>
             <ScrollText className="size-4" aria-hidden /> Honesty receipt

@@ -18,6 +18,7 @@ import { Dialog, Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/u
 import { Skeleton, Notice, EmptyState } from "@/components/ui/misc";
 import { StatusChip } from "@/components/ui/status";
 import { TrustLegend } from "@/components/ui/trust-legend";
+import { ReferenceList, copyReferences, downloadForWord } from "@/components/ui/references";
 import { referenceListStatement } from "@/shared/statement";
 import { RecordCard, type Decision } from "./record-card";
 import { ReportDialog } from "@/features/shared/report-dialog";
@@ -74,7 +75,7 @@ export function AuditView() {
   const [reportItem, setReportItem] = React.useState<AuditItemDTO | null>(null);
   const [styleChoice, setStyle] = React.useState<CitationStyleId | null>(null);
   const [format, setFormat] = React.useState<(typeof FORMATS)[number]["id"]>("text");
-  const [exported, setExported] = React.useState<{ content: string; count: number } | null>(null);
+  const [exported, setExported] = React.useState<{ content: string; count: number; html?: string } | null>(null);
   const [tab, setTab] = React.useState("all");
   const started = React.useRef(false);
 
@@ -157,7 +158,7 @@ export function AuditView() {
   });
 
   const doExport = useMutation({
-    mutationFn: () => api<{ content: string; count: number; duplicates?: number; asWritten?: number }>(`/api/audits/${id}/export?style=${style}&format=${format}`),
+    mutationFn: () => api<{ content: string; html?: string; count: number; duplicates?: number; asWritten?: number }>(`/api/audits/${id}/export?style=${style}&format=${format}`),
     onSuccess: (r) => {
       setExported(r);
       // Say plainly what the export did that the student might not expect.
@@ -412,18 +413,23 @@ export function AuditView() {
             <Button
               variant="secondary"
               onClick={async () => {
-                if (exported && (await copyText(exported.content))) toast.success("Copied to clipboard");
+                if (exported && (await copyReferences(format === "text" ? exported.html : "", exported.content))) toast.success(format === "text" && exported.html ? "Copied with italics" : "Copied to clipboard");
               }}
             >
               <Copy className="size-4" aria-hidden /> Copy
             </Button>
-            <Button variant="primary" onClick={() => exported && download(`knowlix-references.${fmt.ext}`, exported.content)}>
+            <Button variant={format === "text" && exported?.html ? "secondary" : "primary"} onClick={() => exported && download(`knowlix-references.${fmt.ext}`, exported.content)}>
               <Download className="size-4" aria-hidden /> Download .{fmt.ext}
             </Button>
+            {format === "text" && exported?.html ? (
+              <Button variant="primary" onClick={() => downloadForWord(exported.html!, "knowlix-references")}>
+                <Download className="size-4" aria-hidden /> Word (.rtf)
+              </Button>
+            ) : null}
           </>
         }
       >
-        <pre className="max-h-[50vh] overflow-auto whitespace-pre-wrap [overflow-wrap:anywhere] rounded-xl border border-rule bg-paper p-4 font-record text-[0.88rem] leading-relaxed text-ink">{exported?.content}</pre>
+        <ReferenceList html={format === "text" ? exported?.html : ""} text={exported?.content ?? ""} />
         <div className="mt-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 className="text-[0.92rem] font-bold text-ink">AI-use statement</h3>

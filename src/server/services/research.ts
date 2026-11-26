@@ -21,7 +21,7 @@ import { extractivePlan, extractiveSummary, ruleCritic, screenByRelevance } from
 import { bm25Rank } from "../research/text";
 import { verifyReference } from "../verify/verify";
 import { recordColumns } from "./records";
-import { formatBibliography, formatInText } from "../cite/citeproc";
+import { formatBibliography, formatBibliographyHtml, formatInText } from "../cite/citeproc";
 import { cslYear, firstAuthorFamily } from "../scholarly/csl";
 import { isPreprintDoi, normalizeDoi } from "@/shared/identifiers";
 import { parseReference } from "../verify/parse";
@@ -974,7 +974,8 @@ export async function exportRun(ctx: WorkspaceCtx, id: string, style: CitationSt
   }
   for (const g of draft.gaps) lines.push(`${g} [Not found]`);
   const usedIds = new Set(draft.sentences.flatMap((s) => s.citations.map((c) => pmap.get(c)?.sourceId)));
-  const references = await formatBibliography(chosen.filter((s) => usedIds.has(s.id)).map((s) => cslById.get(s.id)!), style, "text");
+  const cited = chosen.filter((s) => usedIds.has(s.id)).map((s) => cslById.get(s.id)!);
+  const [references, referencesHtml] = await Promise.all([formatBibliography(cited, style, "text"), formatBibliographyHtml(cited, style)]);
   await tryLog(ctx.db, ctx.workspaceId, { actor: "student", action: "research.exported", subjectType: "run", subjectId: id, summary: `Exported the approved summary in ${style.toUpperCase()}.` });
-  return { summary: lines.join("\n\n"), references, mode: draft.mode, stats: draft.stats };
+  return { summary: lines.join("\n\n"), references, referencesHtml, mode: draft.mode, stats: draft.stats };
 }
