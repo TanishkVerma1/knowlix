@@ -95,6 +95,23 @@ function finish(
   return { ...partial, entered, checkedAt: new Date().toISOString(), durationMs: Date.now() - t0 };
 }
 
+/** "Mental health. World Health Organization. https://…": the part of a pasted web reference that names who published it. */
+function namedOrganisation(raw: string, title: string | null): string | null {
+  const parts = raw
+    .replace(/https?:\/\/\S+/g, "")
+    .split(/\.\s+|\.\s*$/)
+    .map((x) => x.trim())
+    .filter(Boolean);
+  const t = (title ?? "").toLowerCase();
+  return (
+    parts.find((x) => {
+      const words = x.split(/\s+/);
+      const capitalised = words.filter((w) => /^\p{Lu}/u.test(w)).length;
+      return x.toLowerCase() !== t && x.length >= 3 && words.length <= 8 && !/\d{4}/.test(x) && /^\p{Lu}/u.test(x) && capitalised >= Math.max(1, Math.ceil(words.length * 0.6)) && (words.length > 1 || x === x.toUpperCase());
+    }) ?? null
+  );
+}
+
 /* ───────────────────────── DOI path ───────────────────────── */
 
 async function verifyByDoi(p: ParsedReference, doi: string, t0: number, tl: Timeline): Promise<VerificationResult> {
@@ -112,7 +129,7 @@ async function verifyByDoi(p: ParsedReference, doi: string, t0: number, tl: Time
       status: "mismatch",
       score: null,
       reasonCode: "doi-not-registered",
-      reason: `The DOI ${doi} does not exist. No registry has ever issued it.`,
+      reason: `Not found. The DOI ${doi} is not registered with any DOI registry (asked doi.org and Crossref).`,
       record: null,
       recordSource: null,
       fields: [],
@@ -227,6 +244,27 @@ async function verifyByDoi(p: ParsedReference, doi: string, t0: number, tl: Time
       score: m.score,
       reasonCode: "doi-other-paper",
       reason: `This DOI belongs to a different paper: “${(record.title ?? "").slice(0, 120)}”.`,
+      record,
+      recordSource: source,
+      fields: m.fields,
+      flags,
+      checks: tl.steps,
+      provenWrong: true,
+    });
+  }
+
+  // The DOI and the title are real, but none of the people named wrote it: the reference credits the wrong authors.
+  // (Only when the record's own authors are nowhere in what was pasted, so a parsing slip cannot cause it.)
+  const recordFamilies = (record.author ?? []).map((a) => (a.family ?? a.literal ?? "").toLowerCase()).filter((f) => f.length >= 3);
+  const rawLower = p.raw.toLowerCase();
+  const wrongAuthors = p.authors.length >= 1 && m.authors.entered !== null && m.authors.similarity === 0 && recordFamilies.length >= 1 && !recordFamilies.slice(0, 6).some((f) => rawLower.includes(f));
+  if (wrongAuthors) {
+    const real = (record.author ?? []).map((a) => a.family ?? a.literal ?? "").filter(Boolean);
+    return finish(t0, p, {
+      status: "mismatch",
+      score: m.score,
+      reasonCode: "doi-other-paper",
+      reason: `This DOI belongs to a paper by ${real.slice(0, 3).join(", ")}${real.length > 3 ? " et al." : ""}, not by ${p.authors.map((a) => a.family).slice(0, 3).join(", ")}: “${(record.title ?? "").slice(0, 110)}”.`,
       record,
       recordSource: source,
       fields: m.fields,
@@ -445,7 +483,15 @@ async function findIntended(p: ParsedReference, result: VerificationResult): Pro
     ms: Date.now() - t,
   });
   // "Searched and found nothing" is only claimed when the search really ran.
-  return { ...result, suggestion: ok ? { record: alt.record!, source: alt.recordSource!, score: alt.score! } : null, searchedForIntended: !unreachable };
+  // Say where it looked: an invented reference is "not found" in every place a real one would be.
+  const reason =
+    result.reasonCode === "doi-not-registered" && !ok && !unreachable
+      ? `Not found. The DOI ${p.doi} is not registered with any DOI registry (asked doi.org and Crossref), and no paper with this title and these authors was found in Crossref or OpenAlex.`
+      : result.reason;
+  // Right title, wrong authors: the paper the DOI points to is the paper that was meant, so it is the fix on offer.
+  const titleField = result.fields.find((f) => f.field === "title");
+  const ownRecord = result.reasonCode === "doi-other-paper" && result.record && result.recordSource && titleField && titleField.similarity >= 0.9 ? { record: result.record, source: result.recordSource, score: result.score ?? 0 } : null;
+  return { ...result, reason, suggestion: ok ? { record: alt.record!, source: alt.recordSource!, score: alt.score! } : ownRecord, searchedForIntended: !unreachable };
 }
 
 /**
@@ -478,12 +524,16 @@ async function verifyLink(p: ParsedReference, link: string, t0: number, tl: Time
     const r = await verifyByDoi({ ...p, format: "doi", doi: pageDoi }, pageDoi, t0, tl);
     if (!r.provenWrong) return r;
   }
+  const record = pageToCsl(meta);
+  // The page gave only its address, not its publisher. If the student named the organisation, that name is used.
+  const org = !meta.authors.length && (!meta.site || /^\S+\.[a-z]{2,}$/i.test(meta.site)) ? namedOrganisation(p.raw, meta.title) : null;
+  if (org) record.author = [{ literal: org }];
   return finish(t0, p, {
     status: "check",
     score: null,
     reasonCode: "web-page",
     reason: "A working web page, not a scholarly record. Its title and date were read from the page; judge its reliability yourself.",
-    record: pageToCsl(meta),
+    record,
     recordSource: null,
     fields: [],
     flags: [{ code: "web-page", label: "Web page", detail: "Not peer reviewed, and it can change. The citation records the day it was read.", severity: "info", href: meta.url }],

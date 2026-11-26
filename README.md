@@ -19,16 +19,22 @@ Students paste references from anywhere (ChatGPT answers, Google Scholar, a frie
 | **Three checkpoints** | Approve the plan → choose the sources → review the summary. Enforced by the server. |
 | **Governance** | Honesty receipt (with how many sentences' evidence the student opened), read-only supervisor link, AI-use statement, a hash-chained activity log that Postgres refuses to edit, course policy presets, "Sent to the AI" for every call, and delete-my-data. |
 
-## Phase 2 requirements, and where to see each one
+## Phase 2: the day-of requirements, and where to see each one
 
-| Requirement | Where in the app |
-|---|---|
-| 1. The fake reference test | **Citation Audit** or **Library → Add a reference**. Every reference is checked live, by code, against doi.org, Crossref and OpenAlex. A made-up DOI is stamped **Mismatch** and refused; a made-up title or author is stamped **Not found**; if the databases do not answer it is **Not yet verified**. Nothing unconfirmed is ever shown as Verified. |
-| 2. Trust labels on everything | Every reference carries a stamp and every AI sentence a label (Verified, Reported, AI reasoning, Not found). Sources the AI recommends carry **AI suggestion**. A "What the labels mean" guide sits on the audit, library, sources and summary screens. |
-| 3. The user approves | Library: a reference is checked first and saved only after **Approve and add to my references**. Research: no source starts approved; each is approved with one click. Audit: **Save to library** is a button, never automatic. |
-| 4. Export in APA 7 | Audit → Export, Library → Cite, and the research export all default to **APA 7th edition**, with Copy and Download. |
-| 5. AI use statement | Generated with every export (audit, library and research) from what actually happened, with its own copy button. |
-| Works on a phone | Checked at 390 px wide in a real browser: no sideways scrolling on the home, library, audit, sources or summary screens. |
+Paste the brief's eight references on the Home page (they can be pasted exactly as copied, with line wraps and letter labels) and click **Check 8 references**.
+
+| Required case | What the website shows | Phase 1 step that handles it |
+|---|---|---|
+| 1. Invented reference | **Not found**, and where it looked (doi.org, Crossref, OpenAlex). Never verified, never swapped. | Lock 1, the reference check (code, no AI) |
+| 2. Real DOI, wrong paper | **Mismatch**, with "What this DOI really points to" under what was pasted. | Lock 1, "Compared details" |
+| 3. Small error | **Needs fix**: the wrong detail beside the official one. Accept with **Use the official record**, or reject. | Lock 1 scoring and the audit's decision step |
+| 4. Retracted paper | **Retracted**, in red. It cannot be made Verified. | Lock 1, "Retraction notices" |
+| 5. Duplicate | "Duplicate found", with a **Merge** button. One entry is kept. | The audit's decision step |
+| 6. No source exists | **Not found** in answer to the question; related real sources are listed, each checked and labelled, none approved until the student clicks. | Finder agent and checkpoint 2 |
+
+Bonus cases: a real paper with no DOI is verified by title and authors; a web page is a labelled **Web source**, exported in APA 7 with the organisation as author and "n.d."; a quote that is in no source is **Quote not found**; a database that does not answer gives **Not checked**; an instruction hidden in a note or request is treated as text.
+
+Constraints: every reference shows a status in the audit, the library and every export; the student makes every decision; nothing is guessed; in an exported list anything not Verified stays marked, for example "[Retracted: this paper has been withdrawn]"; and no rule is written for particular references (the brief's pack is kept only as labelled sample data in `tests/fixtures/`).
 
 ## Measured accuracy (Lock 1)
 
@@ -90,7 +96,7 @@ docker compose --profile offline up -d ollama   # optional: offline AI (see dock
 
 ```bash
 npm run typecheck
-npm test                       # 163 unit tests: parser, scoring, guardrails, claim checks, source clients, append-only log, full agent pipeline (mock AI)
+npm test                       # 171 unit tests: parser, scoring, guardrails, claim checks, source clients, append-only log, full agent pipeline (mock AI)
 npm run smoke -- http://localhost:3000   # end-to-end checks against a running app (any URL)
 npm run bench -- holdout       # Lock 1 accuracy on the hand-written held-out set
 npm run bench:generated        # Lock 1 accuracy on the large generated set (about 15 minutes)

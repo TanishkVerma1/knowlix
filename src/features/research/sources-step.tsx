@@ -12,12 +12,27 @@ import { PdfUpload } from "./pdf-upload";
 import { SourceMix } from "./source-mix";
 import { trustLabel } from "@/shared/labels";
 import { TrustLegend } from "@/components/ui/trust-legend";
+import { findQuote, quotedPassages } from "@/shared/requests";
 
 const REL = {
   high: { label: "Highly relevant", cls: "bg-ok-tint text-ok" },
   medium: { label: "Related", cls: "bg-info-tint text-info" },
   low: { label: "Off-topic", cls: "bg-pending-tint text-pending" },
 } as const;
+
+/**
+ * Names the question mentions (runs of capitalised words or years, such as an event or a place)
+ * that no source mentions anywhere in its title or abstract. If the thing asked about is in no
+ * source, the honest answer to the question is "Not found", however many related studies exist.
+ */
+export function missingNames(question: string, sources: SourceCandidate[]): string[] {
+  const names = [...new Set((question.match(/(?:\b[A-Z][A-Za-z0-9'’-]*|\b\d{4})(?:\s+(?:[A-Z][A-Za-z0-9'’-]*|\d{4}))+/g) ?? []).map((n) => n.trim()))];
+  const hay = sources.map((x) => `${x.csl.title ?? ""} ${x.csl.abstract ?? ""}`.toLowerCase()).join("\n");
+  return names.filter((n) => {
+    const core = n.replace(/\b\d{4}\b/g, "").replace(/\s+/g, " ").trim().toLowerCase();
+    return core.length >= 4 && !hay.includes(core);
+  });
+}
 
 function SourceRow({ c, checked, onToggle, disabled, suggested, byAi }: { c: SourceCandidate; checked: boolean; onToggle: () => void; disabled: boolean; suggested: boolean; byAi: boolean }) {
   const [open, setOpen] = React.useState(false);
@@ -32,7 +47,7 @@ function SourceRow({ c, checked, onToggle, disabled, suggested, byAi }: { c: Sou
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="font-record text-[0.8rem] font-bold text-ink-3">{c.id}</span>
-            {v ? <StatusChip status={v.status} label={trustLabel(v.status, v.reasonCode).name} /> : null}
+            {v ? <StatusChip status={v.status} label={trustLabel(v.status, v.reasonCode, v.flags).name} tone={trustLabel(v.status, v.reasonCode, v.flags).tone} /> : null}
             {suggested ? <span className="rounded-full bg-neutral-tint px-2.5 py-1 text-[0.78rem] font-bold leading-none text-neutral">{byAi ? "AI suggestion" : "Suggested"}</span> : null}
             {c.relevance ? (
               <Tip content={c.relevanceReason ?? ""}>
@@ -112,6 +127,9 @@ export function SourcesStep({
   const suggestedIds = reviewing ? run.sources.filter((s) => s.accepted && s.origin !== "upload").map((s) => s.id) : [];
   const [picked, setPicked] = React.useState<Set<string>>(() => new Set(reviewing ? [] : run.sources.filter((s) => s.accepted).map((s) => s.id)));
   const report = run.searchReport;
+  const missing = missingNames(run.question, run.sources);
+  // A quotation in the request is looked for, word for word, in what the sources say. It is never confirmed on trust.
+  const quoteChecks = quotedPassages(run.question).map((q) => ({ quote: q, at: findQuote(q, run.sources.map((x) => `${x.csl.title ?? ""}. ${x.csl.abstract ?? ""}`)) }));
   const chosen = run.sources.filter((s) => picked.has(s.id));
   const withAbstract = chosen.filter((s) => s.abstractAvailable).length;
   const toggle = (id: string) =>
@@ -156,6 +174,34 @@ export function SourcesStep({
           {report.dropped.length ? <p className="mt-3 text-[0.85rem] text-ink-3">Left out: {report.dropped.map((d) => `${d.count} × ${d.reason.toLowerCase()}`).join(" · ")}.</p> : null}
           </details>
         </section>
+      ) : null}
+
+      {quoteChecks.map((c) =>
+        c.at < 0 ? (
+          <div key={c.quote} className="rounded-2xl border border-[color-mix(in_oklab,var(--warn)_35%,var(--rule))] bg-warn-tint px-5 py-4" role="status">
+            <p className="text-[1.05rem] font-bold text-warn">Quote not found</p>
+            <p className="mt-1 text-[0.95rem] text-ink-2">
+              The words “{c.quote.slice(0, 200)}” do not appear in the title or abstract of any of the {run.sources.length} sources found. The full text was not available to check here, so this quote is not confirmed. Do not use it as a quotation unless you find it in the source yourself.
+            </p>
+          </div>
+        ) : (
+          <div key={c.quote} className="rounded-2xl border border-rule bg-ok-tint px-5 py-4" role="status">
+            <p className="text-[1.05rem] font-bold text-ok">Quote found</p>
+            <p className="mt-1 text-[0.95rem] text-ink-2">
+              These exact words appear in {run.sources[c.at].id}: “{run.sources[c.at].csl.title}”. Read them in context before you quote them.
+            </p>
+          </div>
+        ),
+      )}
+
+      {missing.length ? (
+        <div className="rounded-2xl border border-[color-mix(in_oklab,var(--warn)_35%,var(--rule))] bg-warn-tint px-5 py-4" role="status">
+          <p className="text-[1.05rem] font-bold text-warn">Not found</p>
+          <p className="mt-1 text-[0.95rem] text-ink-2">
+            No source in the databases mentions {missing.map((n) => `“${n}”`).join(" or ")}, so no study answers your question as you asked it. Nothing was invented to fill the gap.
+            {run.sources.length ? " The sources below are related real studies. Each one was checked and is labelled; approve one only if a related study is useful to you." : ""}
+          </p>
+        </div>
       ) : null}
 
       <div className="flex flex-wrap items-end justify-between gap-3">

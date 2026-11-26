@@ -259,7 +259,7 @@ export function explainVerification(r: VerificationResult): Explanation {
     why = "Verified means all three answers are good: the paper exists, your details match the real record, and no warning notice was found.";
     next = flag(r, "doi-suggested") ? "Nothing you must do. Adding its DOI would make it easier for a reader to find." : preprint ? "You can cite it. Mention that it is a preprint." : "Nothing to do. It is ready to cite.";
   } else if (r.status === "mismatch") {
-    headline = r.reasonCode === "doi-not-registered" ? "This DOI does not exist, so the reference cannot be traced." : `This DOI belongs to a different paper, not the one you cited.`;
+    headline = r.reasonCode === "doi-not-registered" ? (r.suggestion ? "This DOI does not exist. A real paper with this title was found." : "Not found: no registry has this DOI, and no database has this paper.") : `This DOI is real, but it belongs to a different paper or to other authors.`;
     why = "Mismatch means the reference is proven wrong, not just unconfirmed. A DOI is a paper's permanent ID: if it does not exist, or points to another paper, no reader can ever find what you cited. AI tools often produce exactly this kind of reference.";
     next = r.suggestion ? "Use the real paper Knowlix found, or remove this reference. It cannot be kept as it is, and export stays locked until you decide." : "Remove it, or replace it with a source you have actually read. It cannot be kept as it is, and export stays locked until you decide.";
   } else if (retracted) {

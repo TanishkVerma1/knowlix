@@ -46,6 +46,8 @@ export function RecordCard({
   onKeep,
   onReport,
   onRecheck,
+  duplicateOf,
+  onMerge,
 }: {
   item: AuditItemDTO;
   landed: boolean;
@@ -58,13 +60,16 @@ export function RecordCard({
   onKeep: () => void;
   onReport: () => void;
   onRecheck?: () => void;
+  /** The number of the earlier reference this one repeats, if it is a duplicate. */
+  duplicateOf?: number | null;
+  onMerge?: () => void;
 }) {
   const r = item.result;
   const removed = item.resolution === "removed";
   const replaced = item.resolution === "replaced";
   const kept = item.resolution === "kept";
   const effective = replaced ? "verified" : item.status;
-  const tone = RECORD_STATUS[effective].tone;
+  const tone = replaced ? RECORD_STATUS[effective].tone : trustLabel(effective, r?.reasonCode, r?.flags).tone;
   // The official record fixes wrong details; it cannot clear a warning about the paper itself (retracted, disputed).
   const paperProblem = Boolean(r && !r.suggestion && r.flags.some((f) => f.code === "retracted" || f.code === "expression-of-concern" || f.code === "second-opinion-disagrees"));
   const canReplace = Boolean(r && !paperProblem && r.reasonCode !== "web-page" && (r.suggestion?.record || (!r.provenWrong && r.status === "check" && r.record)));
@@ -134,16 +139,27 @@ export function RecordCard({
 
           {/* The paper the student probably meant (only for proven-wrong DOIs). */}
           {r?.provenWrong && !item.resolution ? (
-            r.suggestion ? (
-              <div className="mt-3">
-                <RecordSummary record={r.suggestion.record} source={r.suggestion.source} label="Did you mean this real paper?" />
-              </div>
-            ) : r.searchedForIntended ? (
-              <p className="mt-3 flex items-start gap-2 rounded-lg bg-danger-tint px-3 py-2 text-[0.88rem] font-semibold text-danger">
-                <SearchX className="mt-0.5 size-4 shrink-0" aria-hidden />
-                We also searched for a paper with this title and these authors. None exists, so this reference looks invented.
-              </p>
-            ) : null
+            <>
+              {/* What the DOI really points to, right under what was pasted. */}
+              {r.reasonCode === "doi-other-paper" && r.record ? (
+                <div className="mt-3">
+                  <RecordSummary record={r.record} source={r.recordSource} label="What this DOI really points to" />
+                </div>
+              ) : null}
+              {r.suggestion && r.suggestion.record.DOI?.toLowerCase() !== (r.reasonCode === "doi-other-paper" ? r.record?.DOI?.toLowerCase() : undefined) ? (
+                <div className="mt-3">
+                  <RecordSummary record={r.suggestion.record} source={r.suggestion.source} label="Did you mean this real paper?" />
+                </div>
+              ) : null}
+              {!r.suggestion && r.searchedForIntended ? (
+                <p className="mt-3 flex items-start gap-2 rounded-lg bg-danger-tint px-3 py-2 text-[0.88rem] font-semibold text-danger">
+                  <SearchX className="mt-0.5 size-4 shrink-0" aria-hidden />
+                  {r.reasonCode === "doi-not-registered"
+                    ? "Where we looked: doi.org and Crossref for the DOI, then Crossref and OpenAlex for a paper with this title and these authors. Nothing matches, so this reference looks invented."
+                    : "We also searched Crossref and OpenAlex for the paper you described. No real paper has that title and those authors."}
+                </p>
+              ) : null}
+            </>
           ) : null}
 
           {kept ? (
@@ -151,10 +167,23 @@ export function RecordCard({
               <span className="font-bold text-warn">Kept unconfirmed.</span> Your reason: “{item.resolutionReason}”. This goes on your honesty receipt.
             </p>
           ) : null}
+          {duplicateOf ? (
+            <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 rounded-lg bg-warn-tint px-3 py-2 text-[0.88rem] text-ink-2">
+              <p className="min-w-0 flex-1">
+                <span className="font-bold text-warn">{removed ? "Merged." : "Duplicate."}</span>{" "}
+                {removed ? `This was the same paper as No. ${String(duplicateOf).padStart(2, "0")}, so one entry was kept.` : `This is the same paper as No. ${String(duplicateOf).padStart(2, "0")}, written in a different format. Merge them to keep one entry.`}
+              </p>
+              {!removed && onMerge ? (
+                <Button variant="secondary" onClick={onMerge} disabled={busy}>
+                  Merge into No. {String(duplicateOf).padStart(2, "0")}
+                </Button>
+              ) : null}
+            </div>
+          ) : null}
         </div>
 
         <div className="flex shrink-0 items-start justify-end sm:w-36 sm:justify-center sm:pt-6">
-          <Stamp status={effective} date={r?.checkedAt} land={landed} word={replaced ? undefined : trustLabel(effective, r?.reasonCode).stamp} />
+          <Stamp status={effective} date={r?.checkedAt} land={landed} word={replaced ? undefined : trustLabel(effective, r?.reasonCode, r?.flags).stamp} tone={replaced ? undefined : trustLabel(effective, r?.reasonCode, r?.flags).tone} />
         </div>
       </div>
 

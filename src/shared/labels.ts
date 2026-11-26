@@ -106,16 +106,34 @@ export const AGENTS = {
 } as const;
 
 /**
- * The word a reference carries on screen: its status, made exact by why it got
- * that status. "Could not be confirmed" is three different things to a student:
- * the databases have no such reference, the databases did not answer, or a
- * detail is off. Each gets its own word.
+ * The status a reference carries on screen and in every export. One of:
+ * Verified, Needs fix, Mismatch, Retracted, Not found, Not checked, Web source
+ * (or "Please check" for a real record with another kind of warning).
+ * Nothing is Verified by default: the word comes from what the check found.
  */
-export function trustLabel(status: RecordStatus, reasonCode?: string | null): { name: string; stamp: string } {
-  if (status === "check" && reasonCode === "not-found") return { name: "Not found", stamp: "Not found" };
-  if (status === "check" && (reasonCode === "service-unavailable" || reasonCode === "link-unreachable" || reasonCode === "too-little-info")) return { name: "Not yet verified", stamp: "Not yet verified" };
-  if (status === "pending") return { name: "Not yet checked", stamp: "Checking" };
-  return { name: RECORD_STATUS[status].name, stamp: RECORD_STATUS[status].stamp };
+export function trustLabel(status: RecordStatus, reasonCode?: string | null, flags?: { code: string }[] | null): { name: string; stamp: string; tone: Tone } {
+  if (status === "verified") return { name: "Verified", stamp: "Verified", tone: "ok" };
+  if (status === "pending") return { name: "Not checked", stamp: "Checking", tone: "pending" };
+  if (status === "mismatch") return reasonCode === "doi-not-registered" ? { name: "Not found", stamp: "Not found", tone: "danger" } : { name: "Mismatch", stamp: "Mismatch", tone: "danger" };
+  if (flags?.some((f) => f.code === "retracted")) return { name: "Retracted", stamp: "Retracted", tone: "danger" };
+  if (reasonCode === "not-found") return { name: "Not found", stamp: "Not found", tone: "warn" };
+  if (reasonCode === "service-unavailable" || reasonCode === "link-unreachable" || reasonCode === "too-little-info") return { name: "Not checked", stamp: "Not checked", tone: "warn" };
+  if (reasonCode === "web-page") return { name: "Web source", stamp: "Web source", tone: "warn" };
+  if (reasonCode === "partial-match" || reasonCode === "close-match") return { name: "Needs fix", stamp: "Needs fix", tone: "warn" };
+  return { name: RECORD_STATUS.check.name, stamp: RECORD_STATUS.check.stamp, tone: "warn" };
+}
+
+/** The words printed after a reference in an exported list, or null when it is Verified. Warnings travel with the reference. */
+export function exportMark(status: RecordStatus, reasonCode?: string | null, flags?: { code: string }[] | null): string | null {
+  const name = trustLabel(status, reasonCode, flags).name;
+  if (name === "Verified") return null;
+  if (name === "Retracted") return "Retracted: this paper has been withdrawn";
+  if (name === "Not found") return "Not found in any database: not verified";
+  if (name === "Needs fix") return "Needs fix: a detail differs from the official record";
+  if (name === "Web source") return "Web source: not checked in a scholarly database";
+  if (name === "Not checked") return "Not checked";
+  if (name === "Mismatch") return "Mismatch: not verified";
+  return "Not verified: check before citing";
 }
 
 export interface LegendEntry {
@@ -127,10 +145,12 @@ export interface LegendEntry {
 /** What each label on a reference means, in the words shown on screen. */
 export const REFERENCE_LEGEND: LegendEntry[] = [
   { name: "Verified", tone: "ok", meaning: "Found in doi.org, Crossref or OpenAlex, and the title, authors and year match. Safe to cite." },
-  { name: "Please check", tone: "warn", meaning: "A real record was found, but a detail differs or it carries a warning such as a retraction. Read the reason first." },
-  { name: "Not found", tone: "warn", meaning: "No scholarly database has this reference. It may be invented. It is never shown as Verified." },
-  { name: "Not yet verified", tone: "warn", meaning: "Not checked: the databases did not answer, or there was too little detail to search with. Nothing has been confirmed." },
-  { name: "Mismatch", tone: "danger", meaning: "Proven wrong: the DOI does not exist or belongs to a different paper. It cannot be saved or exported." },
+  { name: "Needs fix", tone: "warn", meaning: "The paper is real, but a detail such as the year is wrong. The official detail is shown: accept the fix or reject it." },
+  { name: "Mismatch", tone: "danger", meaning: "The DOI is real but belongs to a different paper or to other authors. What it really points to is shown next to what you pasted." },
+  { name: "Retracted", tone: "danger", meaning: "A real paper that the journal has withdrawn. It is never shown as a normal verified source." },
+  { name: "Not found", tone: "warn", meaning: "No registry has this DOI and no database has this title and authors. It may be invented. Never shown as Verified." },
+  { name: "Not checked", tone: "warn", meaning: "The databases did not answer, or there was too little detail to search with. Nothing has been confirmed: try again." },
+  { name: "Web source", tone: "warn", meaning: "A working web page. It was not checked in a scholarly database, so judge its reliability yourself." },
 ];
 
 /** A source the AI recommends but the student has not approved. */

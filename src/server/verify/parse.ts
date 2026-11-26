@@ -273,17 +273,39 @@ function startKind(line: string): "strong" | "weak" | null {
 const CONTINUATION_OPENER =
   /^(?:Retrieved\b|Available\s+(?:at|from|online)\b|Accessed\b|Last\s+accessed\b|In:?\s+\p{Lu}|pp?\.\s*\d|Vol(?:ume)?\.?\s*\d|No\.\s*\d|ISSN\b|ISBN\b|PMID\b|PMCID\b|URL\b|doi\b|https?:|www\.)/iu;
 
+/** "Econometrica, 47(2), 263–291." / "The Lancet, 351(9103), 637": the journal, volume and pages of the reference above. */
+const VENUE_LINE = /^[^.()\d]{3,80},\s*(?:vol\.?\s*)?\d{1,4}\s*(?:\(\d[^)]{0,12}\))?\s*[,:;]\s*(?:pp?\.\s*)?[A-Za-z]?\d+/i;
+
+/**
+ * "A. Kahneman, D., & Tversky, A. (1981)…": is the first letter a list label rather than an author's initial?
+ * (A lone capital and a full stop also begins an IEEE author, "K. He, X. Zhang", so the rest has to look like
+ * the start of a reference in another style.)
+ */
+function letterIsLabel(line: string, rest: string): boolean {
+  // "Kahneman, D., & …" / "Wakefield, A. J., Murch, …" / "Smith, J. (2020)": APA puts a comma or a date after the initials.
+  if (/^[^,]{2,40},\s*(?:\p{Lu}\.\s?){1,3}(?:,\s*(?:&|\p{Lu})|\s*\((?:\d{4}|n\.))/u.test(rest)) return true;
+  if (START_VANCOUVER.test(rest) || START_DATED.test(rest)) return true;
+  // "Mental health. World Health Organization.": a title, not a surname.
+  return /^\p{Lu}[\p{Ll}'’-]+\s+\p{Ll}/u.test(rest) && !START_IEEE.test(line);
+}
+
 /** Splits the plain-text part of a paste (no BibTeX / RIS) into references. */
 function splitPlain(remaining: string): string[] {
   const lines: Line[] = [];
   let blank = false;
-  for (const rawLine of remaining.split("\n")) {
-    const raw = rawLine.trim();
+  const rawLines = remaining.split("\n").map((x) => x.trim());
+  for (let k = 0; k < rawLines.length; k++) {
+    const raw = rawLines[k];
     if (!raw) {
       blank = true;
       continue;
     }
-    if (HEADING.test(raw)) {
+    // A line that introduces a list ("References, exactly as pasted:") and the header or footer a browser prints on
+    // each page ("26/11/2026, 13:34 Page title", "https://… 2/4") are not references.
+    const next = rawLines.slice(k + 1).find(Boolean) ?? "";
+    const introducesList = /^[^\d]{3,90}:$/.test(raw) && raw.split(/\s+/).length <= 14 && (lines.length === 0 || blank || /^(?:\[\d+\]|\(?\d{1,3}[.)]|[A-Z][.)]|[•*▪●◦·‣⁃-])\s+/.test(next));
+    const printFurniture = /^\d{1,2}\/\d{1,2}\/\d{2,4},\s*\d{1,2}:\d{2}\b/.test(raw) || /^https?:\/\/\S+\s+\d+\/\d+$/.test(raw);
+    if (HEADING.test(raw) || introducesList || printFurniture) {
       blank = true;
       continue;
     }
@@ -292,6 +314,26 @@ function splitPlain(remaining: string): string[] {
     blank = false;
   }
   if (!lines.length) return [];
+
+  // A list labelled with letters: "A. …", "B. …", "C. …".
+  {
+    const labelled: number[] = [];
+    let expected = 65; // "A"
+    lines.forEach((l, i) => {
+      const m = l.marker ? null : l.raw.match(/^([A-Z])[.)]\s+(?=\S)/);
+      if (m && m[1].charCodeAt(0) === expected) {
+        labelled.push(i);
+        expected++;
+      }
+    });
+    const first = lines[0].marker ? null : lines[0].raw.match(/^[A-Z][.)]\s+(?=\S)/);
+    const inOrder = labelled.length >= 2;
+    const lone = !inOrder && first !== null && letterIsLabel(lines[0].raw, lines[0].raw.slice(first[0].length));
+    for (const i of inOrder ? labelled : lone ? [0] : []) {
+      const body = lines[i].raw.replace(/^[A-Z][.)]\s+/, "");
+      lines[i] = { ...lines[i], body, marker: "num", idKind: identifierKind(body) };
+    }
+  }
 
   // What kind of paste is this?
   const width = Math.max(...lines.map((l) => l.raw.length));
@@ -340,6 +382,8 @@ function splitPlain(remaining: string): string[] {
     }
     if (prev.idOnly) return true;
     if (hard) return false;
+    // The journal, volume and pages wrapped onto their own line belong to the reference above.
+    if (VENUE_LINE.test(text) && startKind(text) !== "strong") return false;
     const prevDate = hasDate(prev.text);
     const prevEnds = endsTerminal(prev.text);
     // Still inside the author list or the title: no date yet and no sentence end.
@@ -374,7 +418,9 @@ function splitPlain(remaining: string): string[] {
     if (startsNew(prev, i)) {
       items.push({ text: line.body, lastLen: line.raw.length, lines: 1, marker: line.marker, blankBefore: line.blankBefore, idOnly: line.idKind !== null });
     } else {
-      prev.text = /doi\.org\/$/i.test(prev.text) ? prev.text + line.raw : `${prev.text} ${line.raw}`;
+      // A link or DOI broken across two lines ("…/S0140-" then "6736(97)11096-0") is one identifier.
+      const brokenId = /doi\.org\/$/i.test(prev.text) || (/(?:https?:\/\/\S*|\b10\.\d{4,9}\/\S*)-$/i.test(prev.text) && /^[\w(]/.test(line.raw));
+      prev.text = brokenId ? prev.text + line.raw : `${prev.text} ${line.raw}`;
       prev.lastLen = line.raw.length;
       prev.lines++;
       prev.idOnly = false;

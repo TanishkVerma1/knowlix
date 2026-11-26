@@ -127,13 +127,13 @@ export function AuditView() {
   }, [audit, run]);
 
   const decide = useMutation({
-    mutationFn: ({ itemId, action, reason }: { itemId: string; action: Decision; reason?: string }) =>
+    mutationFn: ({ itemId, action, reason }: { itemId: string; action: Decision; reason?: string; merged?: boolean }) =>
       api<AuditDTO>(`/api/audits/${id}/items/${itemId}`, { method: "PATCH", body: { action, reason } }),
     onSuccess: (data, v) => {
       qc.setQueryData(key, data);
       qc.invalidateQueries({ queryKey: ["activity"] });
       const msg = { replace: "Replaced with the real record", remove: "Removed from the list", keep: "Kept, with your reason recorded", undo: "Decision undone" }[v.action];
-      toast.success(msg);
+      toast.success(v.merged ? "Merged: one entry kept" : msg);
       setKeepItem(null);
       setReason("");
     },
@@ -198,7 +198,25 @@ export function AuditView() {
   };
   const allowOverrides = session.data?.policy.allowOverrides ?? true;
   const fmt = FORMATS.find((f) => f.id === format)!;
-  const auditStatement = !exported ? "" : referenceListStatement({ total: exported?.count ?? 0, verified: Math.min(exported?.count ?? 0, s.verified), style: CITATION_STYLES[style] });
+  // The same paper pasted twice in different formats: the later one is offered for merging. The student decides.
+  const duplicateOf = new Map<string, number>();
+  {
+    const firstSeen = new Map<string, number>();
+    for (const it of audit.items) {
+      const r = it.result;
+      if (!r || it.status === "pending" || it.status === "mismatch") continue;
+      const rec = r.record;
+      const doi = (rec?.DOI ?? r.entered?.doi ?? "").toLowerCase();
+      const title = (rec?.title ?? r.entered?.title ?? "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
+      const key = doi ? `doi:${doi}` : title.length >= 12 ? `t:${title.slice(0, 90)}|${rec?.issued?.["date-parts"]?.[0]?.[0] ?? r.entered?.year ?? ""}` : "";
+      if (!key) continue;
+      const original = firstSeen.get(key);
+      if (original !== undefined) duplicateOf.set(it.id, original);
+      else if (it.resolution !== "removed") firstSeen.set(key, it.position + 1);
+    }
+  }
+  const openDuplicates = audit.items.filter((it) => duplicateOf.has(it.id) && it.resolution !== "removed");
+  const auditStatement = !exported ? "" : referenceListStatement({ total: exported?.count ?? 0, verified: Math.min(exported?.count ?? 0, s.verified), retracted: audit.items.filter((it) => it.resolution !== "removed" && it.result?.flags.some((f) => f.code === "retracted")).length, style: CITATION_STYLES[style] });
 
   const tryExport = () => {
     if (!s.exportLocked) doExport.mutate();
@@ -333,6 +351,22 @@ export function AuditView() {
           <TabsTrigger value="verified" count={lists.verified.length}>Verified</TabsTrigger>
           <TabsTrigger value="decided" count={lists.decided.length}>Decided</TabsTrigger>
         </TabsList>
+        {openDuplicates.length ? (
+          <Notice tone="warn" title={openDuplicates.length === 1 ? "Duplicate found" : `${openDuplicates.length} duplicates found`} className="mt-4">
+            <ul className="space-y-2">
+              {openDuplicates.map((it) => (
+                <li key={it.id} className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                  <span className="min-w-0 flex-1">
+                    No. {String(it.position + 1).padStart(2, "0")} is the same paper as No. {String(duplicateOf.get(it.id)).padStart(2, "0")}, written in a different format. Nothing is merged until you say so.
+                  </span>
+                  <Button variant="secondary" disabled={decide.isPending} onClick={() => decide.mutate({ itemId: it.id, action: "remove", merged: true })}>
+                    Merge into No. {String(duplicateOf.get(it.id)).padStart(2, "0")}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </Notice>
+        ) : null}
         {Object.entries(lists).map(([k, items]) => (
           <TabsContent key={k} value={k} className="mt-4 space-y-4 focus-visible:outline-none">
             {items.length ? (
@@ -353,6 +387,8 @@ export function AuditView() {
                   }}
                   onReport={() => setReportItem(item)}
                   onRecheck={running ? undefined : () => run(true)}
+                  duplicateOf={duplicateOf.get(item.id) ?? null}
+                  onMerge={() => decide.mutate({ itemId: item.id, action: "remove", merged: true })}
                 />
               ))
             ) : (

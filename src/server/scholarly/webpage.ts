@@ -192,7 +192,8 @@ export function pageToCsl(meta: PageMeta, accessed = new Date()): CslItem {
     title: meta.title ?? meta.url,
     author: meta.authors.length ? meta.authors.map(nameOf) : meta.site ? [{ literal: meta.site }] : undefined,
     issued: parts ? { "date-parts": [parts] } : undefined,
-    "container-title": meta.site ?? undefined,
+    // APA leaves the site name out when the site is also the author.
+    "container-title": meta.authors.length ? (meta.site ?? undefined) : undefined,
     URL: meta.url,
     accessed: { "date-parts": [[accessed.getFullYear(), accessed.getMonth() + 1, accessed.getDate()]] },
     abstract: meta.description ?? undefined,

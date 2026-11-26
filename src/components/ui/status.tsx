@@ -30,8 +30,8 @@ export function StatusIcon({ status, className }: { status: RecordStatus; classN
 }
 
 /** Status chip for tables and lists: icon + word, never colour alone. */
-export function StatusChip({ status, className, label }: { status: RecordStatus; className?: string; label?: string }) {
-  const info = RECORD_STATUS[status];
+export function StatusChip({ status, className, label, tone }: { status: RecordStatus; className?: string; label?: string; tone?: Tone }) {
+  const info = { ...RECORD_STATUS[status], tone: tone ?? RECORD_STATUS[status].tone };
   return (
     <span className={cn("inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 text-[0.8rem] font-bold leading-none", toneChip[info.tone], className)}>
       <StatusIcon status={status} className="size-3.5" />
@@ -59,7 +59,7 @@ export function ClaimChip({ label, className, compact }: { label: ClaimLabel; cl
 }
 
 /** The rubber stamp. `land` plays the press animation once (the signature moment). */
-export function Stamp({ status, date, land = false, size = "md", className, word }: { status: RecordStatus; date?: string | null; land?: boolean; size?: "sm" | "md" | "lg"; className?: string; word?: string }) {
+export function Stamp({ status, date, land = false, size = "md", className, word, tone }: { status: RecordStatus; date?: string | null; land?: boolean; size?: "sm" | "md" | "lg"; className?: string; word?: string; tone?: Tone }) {
   if (status === "pending") {
     return (
       <span className={cn("inline-flex items-center gap-2 rounded-lg border border-dashed border-rule-strong px-3 py-2 text-[0.8rem] font-semibold text-ink-3", className)}>
@@ -68,7 +68,7 @@ export function Stamp({ status, date, land = false, size = "md", className, word
       </span>
     );
   }
-  const info = RECORD_STATUS[status];
+  const info = { ...RECORD_STATUS[status], tone: tone ?? RECORD_STATUS[status].tone };
   return (
     <span className={cn("relative inline-flex", className)} role="img" aria-label={`${word ?? info.name}${date ? `, ${stampDate(date)}` : ""}`}>
       {land ? <span aria-hidden className="stamp-ring pointer-events-none absolute inset-0 rounded-lg border-2" style={{ borderColor: `var(--${info.tone}-stamp)` }} /> : null}

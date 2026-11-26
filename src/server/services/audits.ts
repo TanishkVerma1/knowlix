@@ -8,8 +8,9 @@ import { verifyReference } from "../verify/verify";
 import { tryLog } from "../audit/activity";
 import { ApiError } from "../http/api";
 import { isStudentVersion, recordColumns, recordForResult } from "./records";
-import { formatBibliography, formatBibliographyHtml, formatEach, formatEachHtml, toBibtex, toRis } from "../cite/citeproc";
-import { entriesToHtml, escapeHtml } from "@/shared/rich-refs";
+import { toBibtex, toRis } from "../cite/citeproc";
+import { formatMarkedList } from "../cite/marked";
+import { exportMark } from "@/shared/labels";
 import type { CitationStyleId } from "@/shared/policy";
 import type { CslItem, RecordStatus, VerificationResult } from "@/shared/types";
 import { SAMPLE_REFERENCE_LIST } from "./samples";
@@ -248,6 +249,8 @@ async function exportableRecords(ctx: WorkspaceCtx, auditId: string) {
   const records: CslItem[] = [];
   /** For each record: the student's own wording when that is what is being exported, else null. */
   const asWritten: (string | null)[] = [];
+  /** For each record: the status printed after it in the list, or null when it is Verified. */
+  const marks: (string | null)[] = [];
   let duplicates = 0;
   for (const r of kept) {
     const csl = recordForResult(r.result!, r.parsed, r.resolution, `ref-${r.position + 1}`);
@@ -258,40 +261,14 @@ async function exportableRecords(ctx: WorkspaceCtx, auditId: string) {
     }
     seen.add(key);
     records.push(csl);
-    asWritten.push(isStudentVersion(r.result!, r.parsed, r.resolution) ? r.raw.replace(/^\s*(?:\[\d+\]|\(\d+\)|\d+[.)]|[-–•*])\s+/, "").trim() : null);
+    marks.push(r.resolution === "replaced" ? null : exportMark(r.status as RecordStatus, r.result!.reasonCode, r.result!.flags));
+    asWritten.push(r.result!.reasonCode === "web-page" && r.result!.record ? null : isStudentVersion(r.result!, r.parsed, r.resolution) ? r.raw.replace(/^\s*(?:\[\d+\]|\(\d+\)|\d+[.)]|[-–•*])\s+/, "").trim() : null);
   }
-  return { audit, records, rows, asWritten, duplicates };
-}
-
-const NUMBERED: CitationStyleId[] = ["ieee", "vancouver"];
-
-/**
- * The formatted reference list. Confirmed records are formatted in the chosen
- * style. A reference the student kept unconfirmed is printed exactly as they
- * wrote it: re-formatting an unconfirmed reference from a best-guess parse
- * could change it.
- */
-async function formattedList(records: CslItem[], asWritten: (string | null)[], style: CitationStyleId): Promise<{ text: string; html: string }> {
-  if (!records.length) return { text: "", html: "" };
-  if (!asWritten.some(Boolean)) {
-    const [text, html] = await Promise.all([formatBibliography(records, style, "text"), formatBibliographyHtml(records, style)]);
-    return { text, html };
-  }
-  const [each, eachHtml] = await Promise.all([formatEach(records, style), formatEachHtml(records, style)]);
-  const unnumber = (e: string) => e.replace(/^\s*(?:\[\d+\]|\d+\.)\s*/, "");
-  // Each line keeps its plain text and its italic version together, so sorting cannot separate them.
-  const lines = each.map((e, i) => ({ text: asWritten[i] ?? unnumber(e), html: asWritten[i] ? escapeHtml(asWritten[i]!) : unnumber(eachHtml[i] || escapeHtml(e)) }));
-  const ordered = NUMBERED.includes(style)
-    ? lines.map((l, i) => {
-        const n = style === "ieee" ? `[${i + 1}] ` : `${i + 1}. `;
-        return { text: n + l.text, html: n + l.html };
-      })
-    : [...lines].sort((a, b) => a.text.localeCompare(b.text, "en", { sensitivity: "base" }));
-  return { text: ordered.map((l) => l.text).join("\n"), html: entriesToHtml(ordered.map((l) => l.html)) };
+  return { audit, records, rows, asWritten, marks, duplicates };
 }
 
 export async function exportAudit(ctx: WorkspaceCtx, auditId: string, style: CitationStyleId, format: "text" | "bibtex" | "ris" | "csl") {
-  const { audit, records, asWritten, duplicates } = await exportableRecords(ctx, auditId);
+  const { audit, records, asWritten, marks, duplicates } = await exportableRecords(ctx, auditId);
   if (audit.summary.pending > 0) throw new ApiError(409, "pending", "Some references are still being checked.");
   if (audit.summary.undecided > 0 && audit.summary.blocking === 0) {
     throw new ApiError(423, "export-locked", `Export is locked: ${audit.summary.undecided} reference${audit.summary.undecided > 1 ? "s need" : " needs"} a decision. Use the official record, keep it with a reason, or remove it.`, { undecided: audit.summary.undecided });
@@ -304,7 +281,7 @@ export async function exportAudit(ctx: WorkspaceCtx, auditId: string, style: Cit
   if (format === "bibtex") content = await toBibtex(records);
   else if (format === "ris") content = await toRis(records);
   else if (format === "csl") content = JSON.stringify(records, null, 2);
-  else ({ text: content, html } = await formattedList(records, asWritten, style));
+  else ({ text: content, html } = await formatMarkedList(records, style, { asWritten, marks }));
   const asIs = asWritten.filter(Boolean).length;
   await tryLog(ctx.db, ctx.workspaceId, {
     actor: "student",

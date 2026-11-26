@@ -21,7 +21,9 @@ import { extractivePlan, extractiveSummary, ruleCritic, screenByRelevance } from
 import { bm25Rank } from "../research/text";
 import { verifyReference } from "../verify/verify";
 import { recordColumns } from "./records";
-import { formatBibliography, formatBibliographyHtml, formatInText } from "../cite/citeproc";
+import { formatInText } from "../cite/citeproc";
+import { formatMarkedList } from "../cite/marked";
+import { exportMark } from "@/shared/labels";
 import { cslYear, firstAuthorFamily } from "../scholarly/csl";
 import { isPreprintDoi, normalizeDoi } from "@/shared/identifiers";
 import { parseReference } from "../verify/parse";
@@ -974,8 +976,10 @@ export async function exportRun(ctx: WorkspaceCtx, id: string, style: CitationSt
   }
   for (const g of draft.gaps) lines.push(`${g} [Not found]`);
   const usedIds = new Set(draft.sentences.flatMap((s) => s.citations.map((c) => pmap.get(c)?.sourceId)));
-  const cited = chosen.filter((s) => usedIds.has(s.id)).map((s) => cslById.get(s.id)!);
-  const [references, referencesHtml] = await Promise.all([formatBibliography(cited, style, "text"), formatBibliographyHtml(cited, style)]);
+  const citedSources = chosen.filter((s) => usedIds.has(s.id));
+  const { text: references, html: referencesHtml } = await formatMarkedList(citedSources.map((s) => cslById.get(s.id)!), style, {
+    marks: citedSources.map((s) => (s.verification ? exportMark(s.verification.status, s.verification.reasonCode, s.verification.flags) : "Not checked")),
+  });
   await tryLog(ctx.db, ctx.workspaceId, { actor: "student", action: "research.exported", subjectType: "run", subjectId: id, summary: `Exported the approved summary in ${style.toUpperCase()}.` });
   return { summary: lines.join("\n\n"), references, referencesHtml, mode: draft.mode, stats: draft.stats };
 }

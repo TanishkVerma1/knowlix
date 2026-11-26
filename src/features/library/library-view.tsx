@@ -107,7 +107,7 @@ export function LibraryView() {
 
   const items = lib.data?.items ?? [];
   const picked = items.filter((i) => selected.has(i.id));
-  const libStatement = !citeOut ? "" : referenceListStatement({ total: picked.length, verified: picked.filter((i) => i.status === "verified").length, style: CITATION_STYLES[citeStyle] });
+  const libStatement = !citeOut ? "" : referenceListStatement({ total: picked.length, verified: picked.filter((i) => i.status === "verified").length, retracted: picked.filter((i) => i.flags.some((f) => f.code === "retracted")).length, style: CITATION_STYLES[citeStyle] });
   const folders = lib.data?.folders ?? [];
   const allTags = [...new Set(items.flatMap((i) => i.tags))].sort();
   const needle = q.trim().toLowerCase();
@@ -178,7 +178,7 @@ export function LibraryView() {
         {pending ? (
           <div className="mt-3 rounded-xl border border-rule-strong bg-paper px-4 py-3" role="status">
             <div className="flex flex-wrap items-center gap-2">
-              <StatusChip status={pending.result.status} label={trustLabel(pending.result.status, pending.result.reasonCode).name} />
+              <StatusChip status={pending.result.status} label={trustLabel(pending.result.status, pending.result.reasonCode, pending.result.flags).name} tone={trustLabel(pending.result.status, pending.result.reasonCode, pending.result.flags).tone} />
               <span className="text-[0.84rem] font-semibold text-ink-3">Checked just now. Not in your library until you approve it.</span>
             </div>
             <p className="mt-2 font-bold leading-snug text-ink [overflow-wrap:anywhere]">{pending.csl.title ?? pending.text}</p>
@@ -190,7 +190,7 @@ export function LibraryView() {
             <div className="mt-3 flex flex-wrap gap-2">
               <Button type="button" variant={pending.result.status === "verified" ? "primary" : "secondary"} loading={add.isPending} onClick={() => add.mutate({ text: pending.text, approved: true })}>
                 <Check className="size-4" aria-hidden />
-                {pending.result.status === "verified" ? "Approve and add to my references" : `Add anyway, labelled “${trustLabel(pending.result.status, pending.result.reasonCode).name}”`}
+                {pending.result.status === "verified" ? "Approve and add to my references" : `Add anyway, labelled “${trustLabel(pending.result.status, pending.result.reasonCode, pending.result.flags).name}”`}
               </Button>
               <Button type="button" variant="ghost" onClick={() => setPending(null)} disabled={add.isPending}>
                 Don&rsquo;t add
@@ -321,7 +321,7 @@ export function LibraryView() {
                           </span>
                         </button>
                         <span className="mt-1 flex flex-wrap gap-1.5 md:hidden">
-                          <StatusChip status={i.status} label={trustLabel(i.status, i.verification?.reasonCode).name} />
+                          <StatusChip status={i.status} label={trustLabel(i.status, i.verification?.reasonCode, i.verification?.flags).name} tone={trustLabel(i.status, i.verification?.reasonCode, i.verification?.flags).tone} />
                         </span>
                         {i.tags.length ? (
                           <span className="mt-1.5 flex flex-wrap gap-1">
@@ -332,7 +332,7 @@ export function LibraryView() {
                         ) : null}
                       </td>
                       <td className="hidden py-3 pr-3 align-top md:table-cell">
-                        <StatusChip status={i.status} label={trustLabel(i.status, i.verification?.reasonCode).name} />
+                        <StatusChip status={i.status} label={trustLabel(i.status, i.verification?.reasonCode, i.verification?.flags).name} tone={trustLabel(i.status, i.verification?.reasonCode, i.verification?.flags).tone} />
                         {i.flags.some((f) => f.code === "retracted") ? <span className="ml-1.5 rounded-full bg-danger-tint px-2 py-1 text-[0.75rem] font-bold text-danger">Retracted</span> : null}
                       </td>
                       <td className="hidden whitespace-nowrap py-3 pr-4 text-right align-top text-[0.82rem] text-ink-3 lg:table-cell">{relativeTime(i.createdAt)}</td>

@@ -87,38 +87,43 @@ The prompts Knowlix itself sends to its AI roles at runtime are a separate thing
 
 ## Phase 2: day-of adaptation (26 Nov, 1:30 to 3:00 PM)
 
-19. **The day-of brief, pasted in full, with one instruction.**
-    > "Also this is the phase 2: [the five requirements, the phone constraint and the demo rules, pasted as received] So go ahead and work on this also."
+19. **The day-of brief.**
+    > "Also there is a document named ai club hackathon which is for phase 2 that is given to us now so i want you to check these according to my project and whatever is missing or lagging i want you include in the project. also i went and tested a reference exactly as the student pasted them our project counts it as 2 lines or 2 different sites. also i want you to completely match our project level to this document level."
 
-    Follow-ups while it was being built:
-    > "groq key and the gemini key was already updated and if you want a third key from nvidea i can give you that also"
+    How it was worked: the brief's test pack (eight references, three requests) was run through the website exactly as written, first as clean text, then as copied from the PDF with its line wraps and letter labels. Every difference between what the brief asks and what the screen showed became a change. Nothing was written for the pack's own references: each change is a general rule, and the pack is kept only as labelled sample test data in `tests/fixtures/`.
 
-    > "before the research using api keys you can go ahead and implement phase 2 and then test everything"
+    **The six required cases, and the Phase 1 step that handles each**
 
-    What changed, requirement by requirement, and why:
+    | Case | In the pack | What the website shows | Handled by (Phase 1 design) | Changed today |
+    |---|---|---|---|---|
+    | 1. Invented reference | C | **Not found**, with where it looked: doi.org and Crossref for the DOI, then Crossref and OpenAlex for the title and authors. Never verified, never swapped for a similar paper. | Lock 1, the reference check (code, no AI): step "DOI registered?" then "Looked for the paper you meant" | The label was "Mismatch"; it is now "Not found" and names the places searched. |
+    | 2. Real DOI, wrong paper | E | **Mismatch**, with "What this DOI really points to" shown under what the student pasted. | Lock 1: step "Compared details" | A real DOI credited to people who did not write the paper used to be "Please check". It is now Mismatch. |
+    | 3. Small error | A | **Needs fix**: "your year does not match", 1981 against 1979. The student clicks **Use the official record** (accept) or **Keep with a reason** / **Remove** (reject). | Lock 1 scoring (title 40, authors 30, year 15, journal 15) and the audit's decision step | The label was "Please check"; it is now "Needs fix". |
+    | 4. Retracted paper | D | **Retracted**, in red, with "Safe to cite? Retracted". It cannot be turned into Verified. | Lock 1: step "Retraction notices" (Crossref) | The stamp said "Please check"; it now says "Retracted". |
+    | 5. Duplicate | B and G | "Duplicate found: No. 07 is the same paper as No. 02", with a **Merge** button. One entry is kept; the list never prints a paper twice. | The audit's decision step and the export rule "one work, one entry" | Duplicates were dropped quietly at export. Now they are shown and the student merges them. |
+    | 6. No source exists | Request 1 | **Not found**: "No source in the databases mentions …, so no study answers your question as you asked it. Nothing was invented." Related real sources are listed below, each checked and labelled "AI suggestion", none approved until the student clicks. | Finder agent plus checkpoint 2 (the student approves sources); Lock 1 checks every source | The explicit "Not found" answer is new. |
 
-    | Requirement | Already there | Changed today | Why |
-    |---|---|---|---|
-    | 1. Fake reference test | Every reference is checked live against doi.org, Crossref and OpenAlex by code. A made-up DOI is stamped Mismatch and refused. | A made-up title or author is now stamped **Not found** instead of the vaguer "Please check". If the databases do not answer, the stamp is **Not yet verified**. | The brief asks that a fake is clearly shown as unverifiable. "Please check" did not say why. |
-    | 2. Trust labels on everything | References carry a stamp; AI sentences carry Verified, Reported, AI reasoning or Not found. | A "What the labels mean" guide on the audit, library, sources and summary screens. Sources the AI recommends carry an **AI suggestion** label. | The brief asks for the labels to be explained on screen, not on a separate help page. |
-    | 3. The user approves | Three checkpoints in research; "Save to library" in the audit. | The library now checks first and shows the result; nothing is saved until **Approve and add to my references** is clicked. In research no source starts ticked: each one is approved with one click (or all suggestions with one click). | Before, a reference typed into the library was saved as soon as it passed the check, and the AI's picks arrived pre-ticked. Both could be read as "added automatically". |
-    | 4. Export in APA 7 | Six styles through the official Citation Style Language, APA first, copy and download. | The style is named "APA 7th edition" in full; long links wrap on a phone. | So a judge sees the exact edition asked for. |
-    | 5. AI use statement | Generated at the end of a research run from what actually happened. | The same kind of statement now comes with every reference-list export (audit and library), with its own copy button. | A student who only checks a list, and never runs the research assistant, still needs a statement. |
-    | Phone screen | Responsive layout with a drawer menu. | The label guide folds away on a phone; the cite dialog no longer clips. Checked in a browser at 390 px wide: no sideways scrolling on the home, library, audit, sources or summary screens. | The judges may open the site on a phone. |
+    **Bonus cases**
 
-20. **Is it really finished?**
-    > "is the phase 2 implemented perfectly and not missing anythin or doesnt have any flaws"
+    | Case | In the pack | What the website shows |
+    |---|---|---|
+    | B1. Real paper, no DOI | F | **Verified** by title and authors in OpenAlex; "No DOI" is only an information flag. |
+    | B2. Web page, no author or date | H | **Web source**: "not checked in a scholarly database". Exported in APA 7 with the organisation as author and "n.d.". |
+    | B3. Quote not in the source | Request 2 | **Quote not found**: the words are searched for in the sources; "the full text was not available to check here, so this quote is not confirmed". |
+    | B4. Database down or slow | (any) | **Not checked**, with a "Check again" button. Never Verified when no check ran. |
+    | B5. Instruction hidden in text | Request 3 | "Treated as text, not as a command": notes and pasted text are content. A status changes only when a check runs. |
 
-    What came out of it: a harder test with twenty trick inputs found three flaws, now fixed. A real title typed on its own was stamped Not found although its record had been found (it now says Please check and offers the official record; a title alone never earns Verified). Very short made-up titles were skipped instead of searched. An uploaded PDF was approved without a click.
+    **Constraints**
 
-21. **A demo script.**
-    > "if i am giving a demo of this project what all do i need to show demo like a demo link that is wron, a demo link that is correct, etc. so i want you to give me a document consisting everything that is required to give the perfect and complete demo of the project."
+    | Constraint | How the website meets it |
+    |---|---|
+    | 1. Nothing verified by default | Every reference carries one of Verified, Needs fix, Mismatch, Retracted, Not found, Not checked or Web source, in the audit, the library and every export. The label guide is on the same screens. |
+    | 2. The student decides | Fixes, merges, removals and saves are buttons. Nothing is corrected, deleted, swapped or added to the library without a click. |
+    | 3. No guessing | Details come only from the registries. If a database does not answer, the status is "Not checked". |
+    | 4. Warnings travel with the reference | In an exported list, anything not Verified is marked after the entry, for example "[Retracted: this paper has been withdrawn]". The AI-use statement counts unverified and retracted items. |
+    | 5. Stay inside the Phase 1 design | No new workflow: the cases are handled by Lock 1 (reference check), the three checkpoints, the Finder agent and Lock 2 (claim check). |
+    | 6. No hard-coding | The rules are general and are covered by unit tests on other references; the pack is used only as labelled sample data. |
 
-    > "also go ahead and create speaking notes for the demo project as it requires us to do in the phase 2."
+    Also fixed from this prompt: a reference pasted with a line break in the middle was being split in two. A journal line ("Econometrica, 47(2), 263–291.") now stays with the reference above it, letter labels ("A.", "B.") are read as list labels, and a DOI cut in two by a line break is joined back together.
 
-22. **APA 7 done properly.**
-    > "fix the apa 7 italics and title case also and i didnt understand the point a not found reference can still be kept. so please explain me that"
-
-    What came out of it: in APA 7th edition, titles are now set in sentence case (acronyms, mixed-case words and common proper nouns are kept), journal names and volumes are italic on screen, Copy carries the italics into a word processor, and a new download opens in Word with the hanging indent and double spacing APA asks for.
-
-23. _Add any further prompt used during the 90 minutes here._
+20. _Add any further prompt used during the 90 minutes here._

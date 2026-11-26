@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/field";
 import { Notice } from "@/components/ui/misc";
 import { cn } from "@/lib/utils";
+import { looksLikeInstruction, quotedPassages } from "@/shared/requests";
 
 export function PlanStep({ run, busy, onApprove }: { run: RunDTO; busy: boolean; onApprove: (queries: PlanQuery[]) => void }) {
   const plan = run.plan!;
@@ -15,8 +16,20 @@ export function PlanStep({ run, busy, onApprove }: { run: RunDTO; busy: boolean;
   const enabled = queries.filter((q) => q.enabled && q.text.trim().length >= 2).length;
   const update = (i: number, patch: Partial<PlanQuery>) => setQueries((qs) => qs.map((q, j) => (j === i ? { ...q, ...patch } : q)));
 
+  const instruction = looksLikeInstruction(run.question);
+  const quotes = quotedPassages(run.question);
   return (
     <div className="space-y-5">
+      {instruction ? (
+        <Notice tone="warn" icon={<ShieldAlert className="size-5" />} title="Treated as text, not as a command">
+          Your request contains an instruction. Knowlix does not take orders from pasted text, notes or sources: a reference&rsquo;s status changes only when a check runs, and no status was changed. To keep a note on a reference, open it in the Library and write it under Notes. It is stored as a note and changes nothing else.
+        </Notice>
+      ) : null}
+      {quotes.length && !instruction ? (
+        <Notice tone="neutral" icon={<Info className="size-5" />} title="A quote to check">
+          After the search, Knowlix looks for these exact words in the sources it finds: “{quotes[0].slice(0, 160)}”. A quote that cannot be found is never confirmed.
+        </Notice>
+      ) : null}
       {plan.integrityNote ? (
         <Notice tone="neutral" icon={<ShieldAlert className="size-5" />} title="A note on academic integrity">
           {plan.integrityNote}

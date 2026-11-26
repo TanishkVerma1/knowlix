@@ -188,7 +188,7 @@ export function ItemSheet({ item, folders, defaultStyle, open, onOpenChange, all
               </a>
             ) : null}
           </div>
-          <Stamp status={item.status} date={v?.checkedAt} word={trustLabel(item.status, v?.reasonCode).stamp} />
+          <Stamp status={item.status} date={v?.checkedAt} word={trustLabel(item.status, v?.reasonCode, v?.flags).stamp} tone={trustLabel(item.status, v?.reasonCode, v?.flags).tone} />
         </div>
 
         <p className={cn("flex items-start gap-2 text-[0.92rem] font-semibold", toneText[info.tone])}>
