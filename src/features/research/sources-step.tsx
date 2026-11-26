@@ -110,7 +110,7 @@ export function SourcesStep({
   // At this checkpoint "accepted" is only a recommendation. Nothing is approved until the student clicks.
   const reviewing = run.state === "sources_review";
   const suggestedIds = reviewing ? run.sources.filter((s) => s.accepted && s.origin !== "upload").map((s) => s.id) : [];
-  const [picked, setPicked] = React.useState<Set<string>>(() => new Set(run.sources.filter((s) => s.accepted && (!reviewing || s.origin === "upload")).map((s) => s.id)));
+  const [picked, setPicked] = React.useState<Set<string>>(() => new Set(reviewing ? [] : run.sources.filter((s) => s.accepted).map((s) => s.id)));
   const report = run.searchReport;
   const chosen = run.sources.filter((s) => picked.has(s.id));
   const withAbstract = chosen.filter((s) => s.abstractAvailable).length;
@@ -175,9 +175,7 @@ export function SourcesStep({
           <PdfUpload
             runId={run.id}
             onAdded={(next) => {
-              const known = new Set(run.sources.map((s) => s.id));
-              const added = next.sources.filter((s) => !known.has(s.id)).map((s) => s.id);
-              setPicked((p) => new Set([...p, ...added]));
+              // Your own PDF is listed like any other source: it still needs your approval click.
               onUploaded(next);
             }}
           />

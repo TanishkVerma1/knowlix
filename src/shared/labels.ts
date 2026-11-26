@@ -113,7 +113,7 @@ export const AGENTS = {
  */
 export function trustLabel(status: RecordStatus, reasonCode?: string | null): { name: string; stamp: string } {
   if (status === "check" && reasonCode === "not-found") return { name: "Not found", stamp: "Not found" };
-  if (status === "check" && (reasonCode === "service-unavailable" || reasonCode === "link-unreachable")) return { name: "Not yet verified", stamp: "Not yet verified" };
+  if (status === "check" && (reasonCode === "service-unavailable" || reasonCode === "link-unreachable" || reasonCode === "too-little-info")) return { name: "Not yet verified", stamp: "Not yet verified" };
   if (status === "pending") return { name: "Not yet checked", stamp: "Checking" };
   return { name: RECORD_STATUS[status].name, stamp: RECORD_STATUS[status].stamp };
 }
@@ -129,7 +129,7 @@ export const REFERENCE_LEGEND: LegendEntry[] = [
   { name: "Verified", tone: "ok", meaning: "Found in doi.org, Crossref or OpenAlex, and the title, authors and year match. Safe to cite." },
   { name: "Please check", tone: "warn", meaning: "A real record was found, but a detail differs or it carries a warning such as a retraction. Read the reason first." },
   { name: "Not found", tone: "warn", meaning: "No scholarly database has this reference. It may be invented. It is never shown as Verified." },
-  { name: "Not yet verified", tone: "warn", meaning: "The databases did not answer, so nothing has been confirmed yet. Check again later." },
+  { name: "Not yet verified", tone: "warn", meaning: "Not checked: the databases did not answer, or there was too little detail to search with. Nothing has been confirmed." },
   { name: "Mismatch", tone: "danger", meaning: "Proven wrong: the DOI does not exist or belongs to a different paper. It cannot be saved or exported." },
 ];
 

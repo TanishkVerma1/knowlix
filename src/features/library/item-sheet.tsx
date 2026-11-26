@@ -1,5 +1,6 @@
 "use client";
 
+import { trustLabel } from "@/shared/labels";
 import * as React from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -187,7 +188,7 @@ export function ItemSheet({ item, folders, defaultStyle, open, onOpenChange, all
               </a>
             ) : null}
           </div>
-          <Stamp status={item.status} date={v?.checkedAt} />
+          <Stamp status={item.status} date={v?.checkedAt} word={trustLabel(item.status, v?.reasonCode).stamp} />
         </div>
 
         <p className={cn("flex items-start gap-2 text-[0.92rem] font-semibold", toneText[info.tone])}>

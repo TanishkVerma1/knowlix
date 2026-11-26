@@ -269,7 +269,9 @@ interface Candidate {
 }
 
 async function verifyWithoutDoi(p: ParsedReference, t0: number, tl: Timeline): Promise<VerificationResult> {
-  if (!p.title && p.raw.replace(/[^A-Za-z]/g, "").length < 25 && !p.isbn) {
+  // A bare title is still searched (a made-up one must come back "not found"); only a fragment is not.
+  const wordCount = p.raw.split(/\s+/).filter((w) => /\p{L}{2,}/u.test(w)).length;
+  if (!p.title && !p.isbn && (p.raw.replace(/[^\p{L}]/gu, "").length < 12 || wordCount < 3)) {
     tl.add({ id: "search", label: "Searched databases", outcome: "skip", detail: "Too little information to search with.", ms: 0 });
     return finish(t0, p, {
       status: "check",
@@ -284,6 +286,10 @@ async function verifyWithoutDoi(p: ParsedReference, t0: number, tl: Timeline): P
       provenWrong: false,
     });
   }
+
+  // Only a title was typed. It is searched as a title, but a title alone can never earn "Verified".
+  const bareTitle = !p.title && !p.authors.length && !p.year && !p.isbn;
+  if (bareTitle) p = { ...p, title: p.raw.trim().replace(/[.\s]+$/, "") };
 
   const looksLikeBook = Boolean(p.isbn) || (!p.volume && !p.pages && Boolean(p.publisher ?? p.venue) && !/journal|review|proceedings|transactions|letters|quarterly/i.test(p.venue ?? ""));
   // Google Books is a second book catalogue; it is skipped while Google is refusing requests (quota).
@@ -343,6 +349,23 @@ async function verifyWithoutDoi(p: ParsedReference, t0: number, tl: Timeline): P
   const answered = ["Crossref", ...(p.title && !oaHits.error ? ["OpenAlex"] : []), ...(p.isbn || looksLikeBook ? ["Open Library"] : []), ...(useGoogleBooks && !gbIsbnHit.error && !gbHits.error ? ["Google Books"] : [])].filter((n) => !(n === "Crossref" && cr.error));
   const silent = [...(cr.error ? ["Crossref"] : []), ...(p.title && oaHits.error ? ["OpenAlex"] : [])];
   const where = answered.length > 1 ? `${answered.slice(0, -1).join(", ")} or ${answered[answered.length - 1]}` : (answered[0] ?? "the databases");
+
+  const sameTitle = bareTitle ? candidates.filter((c) => c.csl.title && c.m.title.similarity >= 0.9).sort((x, y) => y.m.title.similarity - x.m.title.similarity)[0] : undefined;
+  if (sameTitle) {
+    tl.add({ id: "compare", label: "Compared details", outcome: "warn", detail: `A record with this title exists in ${SOURCE_LABEL[sameTitle.source]}. Only the title was given, so authors and year could not be compared.`, ms: 0 });
+    return finish(t0, p, {
+      status: "check",
+      score: null,
+      reasonCode: "partial-match",
+      reason: `A record with this title exists in ${SOURCE_LABEL[sameTitle.source]}, but you gave only the title, so it cannot be confirmed as the work you mean. Use the official record, or add the authors and year.`,
+      record: sameTitle.csl,
+      recordSource: sameTitle.source,
+      fields: sameTitle.m.fields,
+      flags,
+      checks: tl.steps,
+      provenWrong: false,
+    });
+  }
 
   if (!best || best.m.score < CHECK_AT || best.m.title.similarity < 0.75) {
     tl.add({ id: "compare", label: "Compared details", outcome: allFailed ? "error" : "fail", detail: best ? `Closest record scored ${best.m.score}/100 (not a confident match).` : "No candidate records came back.", ms: 0 });
