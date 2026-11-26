@@ -1,0 +1,10 @@
+node_modules
+.next
+.data
+.git
+.env*.local
+.impeccable
+test-results
+playwright-report
+bench/results/*.json
+*.log

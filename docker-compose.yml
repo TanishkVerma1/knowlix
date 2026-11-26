@@ -1,0 +1,55 @@
+# Knowlix on your laptop, no internet accounts needed:
+#   docker compose up --build -d          → http://localhost:3000 (app + Postgres)
+#   Port taken? KNOWLIX_PORT=3200 docker compose up -d   → http://localhost:3200
+# AI inside Docker: cloud keys in .env.local (GROQ_API_KEY, GEMINI_API_KEY) are picked up as they are.
+# A local model is reached through KNOWLIX_OLLAMA_URL, because "localhost" inside the container is not your laptop:
+#   Ollama installed on this computer:  KNOWLIX_OLLAMA_URL=http://host.docker.internal:11434 docker compose up -d
+#   Ollama in Docker too:  docker compose --profile offline up -d ollama && docker compose exec ollama ollama pull qwen2.5:7b
+#                          KNOWLIX_OLLAMA_URL=http://ollama:11434 docker compose up -d
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: knowlix
+      POSTGRES_PASSWORD: knowlix
+      POSTGRES_DB: knowlix
+    volumes:
+      - knowlix-db:/var/lib/postgresql/data
+    ports:
+      - "${KNOWLIX_DB_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U knowlix -d knowlix"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - path: .env.local
+        required: false
+    environment:
+      DATABASE_URL: postgres://knowlix:knowlix@db:5432/knowlix
+      SESSION_SECRET: ${SESSION_SECRET:-change-me-local-docker-secret-0123456789}
+      # Overrides any OLLAMA_BASE_URL from .env.local, which would point at the container itself.
+      OLLAMA_BASE_URL: ${KNOWLIX_OLLAMA_URL:-}
+    ports:
+      - "${KNOWLIX_PORT:-3000}:3000"
+
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["offline"]
+    restart: unless-stopped
+    volumes:
+      - knowlix-ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+
+volumes:
+  knowlix-db:
+  knowlix-ollama:

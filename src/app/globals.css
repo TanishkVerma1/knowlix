@@ -1,26 +1,458 @@
 @import "tailwindcss";
 
+/* Dark mode follows data-theme on <html> (set before paint by the inline script in layout.tsx). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ───────────────── Knowlix tokens: the registrar's record ─────────────────
+   Ink on security paper. Light is the primary theme (projectors).
+   Colour is reserved: outside the shell, a hue only ever means a verdict
+   (green, amber, red), a claim label (blue) or an AI role (violet).
+   Every status is always paired with an icon and a word. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #e6eeee;
+  --paper-2: #d9e4e4;
+  --card: #ffffff;
+  --card-2: #f4f8f8;
+  --ink: #0d1c1e;
+  --ink-2: #314346;
+  --ink-3: #516366;
+  --rule: #c9d6d6;
+  --rule-strong: #a3b6b7;
+  --ruling: #d9e4e4;
+  --ruling-margin: #c9d6d6;
+
+  --rail: #0b2a2e;
+  --rail-2: #123b40;
+  --rail-ink: #eaf5f4;
+  --rail-muted: #a5c2c1;
+
+  --accent: #0b5a63;
+  --accent-hover: #08474f;
+  --accent-ink: #ffffff;
+  --accent-tint: #d9ebec;
+
+  --ok: #266b24;
+  --ok-tint: #e2f1dd;
+  --ok-stamp: #2c7a2a;
+  --warn: #875000;
+  --warn-tint: #fbeecf;
+  --warn-stamp: #ad6800;
+  --danger: #b1251c;
+  --danger-tint: #fbe4e0;
+  --danger-stamp: #c3291b;
+  --info: #1d54a6;
+  --info-tint: #e1eaf9;
+  --neutral: #5a3fb3;
+  --neutral-tint: #ece7fb;
+  --pending: #516366;
+  --pending-tint: #e3ebeb;
+
+  --tab-salmon: #ec9d88;
+  --tab-sage: #9cc293;
+  --tab-sky: #8fbbe6;
+  --tab-buff: #e3c98e;
+  --tab-lilac: #bcaee6;
+
+  /* Records are separated by rules, not shadows. Only things that float cast one. */
+  --shadow-card: 0 0 0 0 transparent;
+  --shadow-lift: 0 2px 6px rgb(13 28 30 / 0.08), 0 22px 44px -18px rgb(13 28 30 / 0.38);
+  --focus: #0b5a63;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --paper: #061415;
+  --paper-2: #0b1e20;
+  --card: #0f2527;
+  --card-2: #142e31;
+  --ink: #e7f2f1;
+  --ink-2: #bdcfce;
+  --ink-3: #92a9a8;
+  --rule: #214044;
+  --rule-strong: #33595d;
+  --ruling: #1a3437;
+  --ruling-margin: #214044;
+
+  --rail: #030e0f;
+  --rail-2: #0b2325;
+  --rail-ink: #eaf5f4;
+  --rail-muted: #9bb8b7;
+
+  --accent: #62d2d9;
+  --accent-hover: #8be1e6;
+  --accent-ink: #04191b;
+  --accent-tint: #103a3e;
+
+  --ok: #84d67f;
+  --ok-tint: #14301a;
+  --ok-stamp: #78cf73;
+  --warn: #f2bb55;
+  --warn-tint: #36270a;
+  --warn-stamp: #e9aa38;
+  --danger: #ff8a7c;
+  --danger-tint: #3d1512;
+  --danger-stamp: #ff7565;
+  --info: #8cbcff;
+  --info-tint: #13284a;
+  --neutral: #b8a8ff;
+  --neutral-tint: #251d47;
+  --pending: #92a9a8;
+  --pending-tint: #16302f;
+
+  --tab-salmon: #c97a66;
+  --tab-sage: #7aa071;
+  --tab-sky: #6f9cc8;
+  --tab-buff: #c2a96f;
+  --tab-lilac: #9a8bc6;
+
+  --shadow-card: 0 0 0 0 transparent;
+  --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.45), 0 22px 48px -16px rgb(0 0 0 / 0.7);
+  --focus: #8be1e6;
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-ruling: var(--ruling);
+  --color-rail: var(--rail);
+  --color-rail-2: var(--rail-2);
+  --color-rail-ink: var(--rail-ink);
+  --color-rail-muted: var(--rail-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-tint: var(--accent-tint);
+  --color-ok: var(--ok);
+  --color-ok-tint: var(--ok-tint);
+  --color-warn: var(--warn);
+  --color-warn-tint: var(--warn-tint);
+  --color-danger: var(--danger);
+  --color-danger-tint: var(--danger-tint);
+  --color-info: var(--info);
+  --color-info-tint: var(--info-tint);
+  --color-neutral: var(--neutral);
+  --color-neutral-tint: var(--neutral-tint);
+  --color-pending: var(--pending);
+  --color-pending-tint: var(--pending-tint);
+  --color-tab-salmon: var(--tab-salmon);
+  --color-tab-sage: var(--tab-sage);
+  --color-tab-sky: var(--tab-sky);
+  --color-tab-buff: var(--tab-buff);
+  --color-tab-lilac: var(--tab-lilac);
+
+  --font-sans: "Knowlix Ampersand", var(--font-archivo), var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+  --font-record: var(--font-courier), "Courier New", ui-monospace, monospace;
+  --font-mono: var(--font-atkinson-mono), ui-monospace, monospace;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
+
+  /* Record corners: 12px on cards, 8px on controls. Pills stay for chips. */
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.625rem;
+  --radius-2xl: 0.75rem;
+  --radius-3xl: 0.875rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-stamp: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* The interface face draws its ampersand as an "et" ligature, which misreads in author lists
+   ("Hattie & Timperley"). The ampersand alone is taken from a plain system face. */
+@font-face {
+  font-family: "Knowlix Ampersand";
+  src: local("Segoe UI Semibold"), local("Segoe UI"), local("Helvetica Neue"), local("Arial");
+  unicode-range: U+0026;
+}
+
+/* ───────────────── Base & browser surfaces ───────────────── */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  font-feature-settings: "kern";
+}
+::selection {
+  background: color-mix(in oklab, var(--accent) 22%, transparent);
+  color: var(--ink);
+}
+input,
+textarea {
+  caret-color: var(--accent);
+}
+a {
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+.tabular,
+table {
+  font-variant-numeric: tabular-nums;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--rule-strong);
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+/* One family, two widths. Titles are set expanded and heavy, the way a certificate
+   sets its heading; everything that is read or operated stays at normal width. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+h1 {
+  font-stretch: 122%;
+  font-variation-settings: "wdth" 122;
+  letter-spacing: -0.022em;
+}
+h2 {
+  font-stretch: 112%;
+  font-variation-settings: "wdth" 112;
+  letter-spacing: -0.014em;
+}
+h3 {
+  font-stretch: 106%;
+  font-variation-settings: "wdth" 106;
+  letter-spacing: -0.008em;
+}
+.wide {
+  font-stretch: 122%;
+  font-variation-settings: "wdth" 122;
+}
+
+/* The register rule: a heavy rule and a guilloche braid, as on the head of an official record. */
+.register-rule {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.register-rule::before {
+  content: "";
+  flex: 1;
+  height: 9px;
+  background: var(--rule-strong);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='9' viewBox='0 0 22 9'%3E%3Cpath d='M0 4.5c2.75-5 8.25-5 11 0s8.25 5 11 0' fill='none' stroke='black' stroke-width='1.1'/%3E%3Cpath d='M0 4.5c2.75 5 8.25 5 11 0s8.25-5 11 0' fill='none' stroke='black' stroke-width='1.1'/%3E%3C/svg%3E") left center / 22px 9px repeat-x;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='9' viewBox='0 0 22 9'%3E%3Cpath d='M0 4.5c2.75-5 8.25-5 11 0s8.25 5 11 0' fill='none' stroke='black' stroke-width='1.1'/%3E%3Cpath d='M0 4.5c2.75 5 8.25 5 11 0s8.25-5 11 0' fill='none' stroke='black' stroke-width='1.1'/%3E%3C/svg%3E") left center / 22px 9px repeat-x;
+}
+p {
+  text-wrap: pretty;
+}
+
+/* ───────────────── The record as submitted ─────────────────
+   What the student typed is shown as they typed it, in the reading face. */
+.ruled {
+  background-color: transparent;
+}
+.ruled-text {
+  line-height: 1.6;
+}
+
+/* ───────────────── The rubber stamp ───────────────── */
+.stamp {
+  --stamp-ink: var(--pending);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0.36rem 0.7rem 0.34rem;
+  border: 2px solid var(--stamp-ink);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 2px var(--card), inset 0 0 0 3px var(--stamp-ink);
+  background: color-mix(in oklab, var(--stamp-ink) 6%, var(--card));
+  color: var(--stamp-ink);
+  transform: rotate(-4deg);
+  line-height: 1;
+  user-select: none;
+  white-space: nowrap;
+}
+.stamp[data-tone="ok"] {
+  --stamp-ink: var(--ok-stamp);
+}
+.stamp[data-tone="warn"] {
+  --stamp-ink: var(--warn-stamp);
+}
+.stamp[data-tone="danger"] {
+  --stamp-ink: var(--danger-stamp);
+}
+.stamp-word {
+  font-weight: 800;
+  font-stretch: 122%;
+  font-variation-settings: "wdth" 122;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+.stamp-date {
+  font-family: var(--font-record);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+.stamp-land {
+  animation: stamp-land 420ms var(--ease-stamp) both;
+}
+@keyframes stamp-land {
+  0% {
+    opacity: 0;
+    transform: rotate(-14deg) scale(1.9);
+    filter: blur(2px);
+  }
+  55% {
+    opacity: 1;
+    transform: rotate(-3deg) scale(0.94);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-4deg) scale(1);
+  }
+}
+.stamp-ring {
+  animation: stamp-ring 600ms var(--ease-out-expo) 120ms both;
+}
+@keyframes stamp-ring {
+  from {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.6);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Checking: a slow sweep on the pending card header */
+.sweep {
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--accent) 35%, transparent), transparent);
+  background-size: 40% 100%;
+  background-repeat: no-repeat;
+  animation: sweep 1.4s var(--ease-out-expo) infinite;
+}
+@keyframes sweep {
+  from {
+    background-position: -40% 0;
+  }
+  to {
+    background-position: 140% 0;
+  }
+}
+
+.fade-up {
+  animation: fade-up 380ms var(--ease-out-expo) both;
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Live agents: a soft pulse around whoever is working, a blinking caret while an answer is typed. */
+.agent-live {
+  animation: agent-live 1.6s ease-in-out infinite;
+}
+@keyframes agent-live {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 45%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent) 0%, transparent);
+  }
+}
+.live-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--danger-stamp);
+  animation: live-dot 1.2s ease-in-out infinite;
+}
+@keyframes live-dot {
+  50% {
+    opacity: 0.25;
+  }
+}
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: currentColor;
+  opacity: 0.85;
+  animation: caret 1s steps(1) infinite;
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+  .sweep {
+    animation: none;
+    background: color-mix(in oklab, var(--accent) 18%, transparent);
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateX(28px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
 }

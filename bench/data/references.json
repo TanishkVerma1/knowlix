@@ -1,0 +1,1353 @@
+[
+  {
+    "id": "R01",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Beigel, J. H., Tomashek, K. M., Dodd, L. E., Mehta, A. K., Zingman, B. S., Kalil, A. C., Hohmann, E., Chu, H. Y., Luetkemeyer, A., Kline, S., Lopez de Castilla, D., Finberg, R. W., Dierberg, K., Tapson, V., Hsieh, L., Patterson, T. F., Paredes, R., Sweeney, D. A., Short, W. R., . . . Lane, H. C. (2020). Remdesivir for the treatment of Covid-19 — Final report. New England Journal of Medicine, 383(19), 1813–1826. https://doi.org/10.1056/NEJMoa2007764",
+    "doi": "10.1056/NEJMoa2007764",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Remdesivir for the Treatment of Covid-19 — Final Report",
+      "authors": [
+        "Beigel",
+        "Tomashek",
+        "Dodd",
+        "Mehta",
+        "Zingman",
+        "Kalil",
+        "Hohmann",
+        "Chu",
+        "Luetkemeyer",
+        "Kline",
+        "Lopez de Castilla",
+        "Finberg",
+        "Dierberg",
+        "Tapson",
+        "Hsieh",
+        "Patterson",
+        "Paredes",
+        "Sweeney",
+        "Short",
+        "Touloumi",
+        "Lye",
+        "Ohmagari",
+        "Oh",
+        "Ruiz-Palacios",
+        "Benfield",
+        "Fätkenheuer",
+        "Kortepeter",
+        "Atmar",
+        "Creech",
+        "Lundgren",
+        "Babiker",
+        "Pett",
+        "Neaton",
+        "Burgess",
+        "Bonnett",
+        "Green",
+        "Makowski",
+        "Osinusi",
+        "Nayak",
+        "Lane"
+      ],
+      "year": 2020,
+      "venue": "New England Journal of Medicine",
+      "doi": "10.1056/NEJMoa2007764"
+    },
+    "note": "Medicine: Crossref record matches title, first/last authors, year 2020 and NEJM 383(19):1813-1826 (40-author list abbreviated APA-style)."
+  },
+  {
+    "id": "R02",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "https://doi.org/10.1126/science.aac4716",
+    "doi": "10.1126/science.aac4716",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Estimating the reproducibility of psychological science",
+      "authors": [
+        "Open Science Collaboration"
+      ],
+      "year": 2015,
+      "venue": "Science",
+      "doi": "10.1126/science.aac4716"
+    },
+    "note": "Bare DOI URL as pasted by a student; it resolves at doi.org to the Open Science Collaboration (2015) Science article and there is no metadata to contradict."
+  },
+  {
+    "id": "R03",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Hattie, J., & Timperley, H. (2007). The power of feedback. Review of Educational Research, 77(1), 81–112. https://doi.org/10.3102/003465430298487",
+    "doi": "10.3102/003465430298487",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The Power of Feedback",
+      "authors": [
+        "Hattie",
+        "Timperley"
+      ],
+      "year": 2007,
+      "venue": "Review of Educational Research",
+      "doi": "10.3102/003465430298487"
+    },
+    "note": "Education: DOI, title, authors, year, volume and pages all match the Crossref (AERA/SAGE) record."
+  },
+  {
+    "id": "R04",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "@article{lecun2015deep,\n  title={Deep learning},\n  author={LeCun, Yann and Bengio, Yoshua and Hinton, Geoffrey},\n  journal={Nature},\n  volume={521},\n  number={7553},\n  pages={436--444},\n  year={2015},\n  publisher={Nature Publishing Group},\n  doi={10.1038/nature14539}\n}",
+    "doi": "10.1038/nature14539",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Deep learning",
+      "authors": [
+        "LeCun",
+        "Bengio",
+        "Hinton"
+      ],
+      "year": 2015,
+      "venue": "Nature",
+      "doi": "10.1038/nature14539"
+    },
+    "note": "CS: BibTeX entry for the Nature review; every field agrees with the Crossref record."
+  },
+  {
+    "id": "R05",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Acemoglu, D., Johnson, S., & Robinson, J. A. (2001). The colonial origins of comparative development: An empirical investigation. American Economic Review, 91(5), 1369–1401. https://doi.org/10.1257/aer.91.5.1369",
+    "doi": "10.1257/aer.91.5.1369",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The Colonial Origins of Comparative Development: An Empirical Investigation",
+      "authors": [
+        "Acemoglu",
+        "Johnson",
+        "Robinson"
+      ],
+      "year": 2001,
+      "venue": "American Economic Review",
+      "doi": "10.1257/aer.91.5.1369"
+    },
+    "note": "Economics: DOI and all metadata match the Crossref (American Economic Association) record."
+  },
+  {
+    "id": "R06",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Page, M.J., McKenzie, J.E., Bossuyt, P.M., Boutron, I., Hoffmann, T.C., Mulrow, C.D. et al. (2021) 'The PRISMA 2020 statement: an updated guideline for reporting systematic reviews', BMJ, 372, n71. doi:10.1136/bmj.n71.",
+    "doi": "10.1136/bmj.n71",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The PRISMA 2020 statement: an updated guideline for reporting systematic reviews",
+      "authors": [
+        "Page",
+        "McKenzie",
+        "Bossuyt",
+        "Boutron",
+        "Hoffmann",
+        "Mulrow",
+        "Shamseer",
+        "Tetzlaff",
+        "Akl",
+        "Brennan",
+        "Chou",
+        "Glanville",
+        "Grimshaw",
+        "Hróbjartsson",
+        "Lalu",
+        "Li",
+        "Loder",
+        "Mayo-Wilson",
+        "McDonald",
+        "McGuinness",
+        "Stewart",
+        "Thomas",
+        "Tricco",
+        "Welch",
+        "Whiting",
+        "Moher"
+      ],
+      "year": 2021,
+      "venue": "BMJ",
+      "doi": "10.1136/bmj.n71"
+    },
+    "note": "Medicine, Harvard style: DOI resolves to the same BMJ article (Crossref leaves volume empty; OpenAlex gives volume 372, article n71)."
+  },
+  {
+    "id": "R07",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Ioannidis, J. P. A. (2005). Why most published research findings are false. PLoS Medicine, 2(8), e124. https://doi.org/10.1371/journal.pmed.0020124",
+    "doi": "10.1371/journal.pmed.0020124",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Why Most Published Research Findings Are False",
+      "authors": [
+        "Ioannidis"
+      ],
+      "year": 2005,
+      "venue": "PLoS Medicine",
+      "doi": "10.1371/journal.pmed.0020124"
+    },
+    "note": "Meta-research essay (PLOS); DOI and metadata match exactly. A 2022 correction notice (10.1371/journal.pmed.1004085) exists but it is not a retraction, so no flag."
+  },
+  {
+    "id": "R08",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Freeman, S., Eddy, S. L., McDonough, M., Smith, M. K., Okoroafor, N., Jordt, H., & Wenderoth, M. P. (2014). Active learning increases student performance in science, engineering, and mathematics. Proceedings of the National Academy of Sciences, 111(23), 8410–8415. https://doi.org/10.1073/pnas.1319030111",
+    "doi": "10.1073/pnas.1319030111",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Active learning increases student performance in science, engineering, and mathematics",
+      "authors": [
+        "Freeman",
+        "Eddy",
+        "McDonough",
+        "Smith",
+        "Okoroafor",
+        "Jordt",
+        "Wenderoth"
+      ],
+      "year": 2014,
+      "venue": "Proceedings of the National Academy of Sciences",
+      "doi": "10.1073/pnas.1319030111"
+    },
+    "note": "Education meta-analysis (PNAS); all seven authors, year, volume, issue and pages match Crossref."
+  },
+  {
+    "id": "R09",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Braun, V., & Clarke, V. (2006). Using thematic analysis in psychology. Qualitative Research in Psychology, 3(2), 77–101. https://doi.org/10.1191/1478088706qp063oa",
+    "doi": "10.1191/1478088706qp063oa",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Using thematic analysis in psychology",
+      "authors": [
+        "Braun",
+        "Clarke"
+      ],
+      "year": 2006,
+      "venue": "Qualitative Research in Psychology",
+      "doi": "10.1191/1478088706qp063oa"
+    },
+    "note": "Psychology methods paper (Taylor & Francis / Informa); DOI and metadata match."
+  },
+  {
+    "id": "R10",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Fama, E. F., & French, K. R. (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics, 33(1), 3–56. https://doi.org/10.1016/0304-405X(93)90023-5",
+    "doi": "10.1016/0304-405X(93)90023-5",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Common risk factors in the returns on stocks and bonds",
+      "authors": [
+        "Fama",
+        "French"
+      ],
+      "year": 1993,
+      "venue": "Journal of Financial Economics",
+      "doi": "10.1016/0304-405X(93)90023-5"
+    },
+    "note": "Finance/economics (Elsevier) with a DOI containing parentheses; DOI and metadata match."
+  },
+  {
+    "id": "R11",
+    "kind": "real",
+    "category": "conference",
+    "raw": "He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) (pp. 770–778). IEEE. https://doi.org/10.1109/CVPR.2016.90",
+    "doi": "10.1109/CVPR.2016.90",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Deep Residual Learning for Image Recognition",
+      "authors": [
+        "He",
+        "Zhang",
+        "Ren",
+        "Sun"
+      ],
+      "year": 2016,
+      "venue": "2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "doi": "10.1109/CVPR.2016.90"
+    },
+    "note": "IEEE conference paper; the Crossref proceedings-article record matches title, authors, year and pages."
+  },
+  {
+    "id": "R12",
+    "kind": "real",
+    "category": "conference",
+    "raw": "Chen, T., & Guestrin, C. (2016). XGBoost: A scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (pp. 785–794). Association for Computing Machinery. https://doi.org/10.1145/2939672.2939785",
+    "doi": "10.1145/2939672.2939785",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "XGBoost: A Scalable Tree Boosting System",
+      "authors": [
+        "Chen",
+        "Guestrin"
+      ],
+      "year": 2016,
+      "venue": "Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining",
+      "doi": "10.1145/2939672.2939785"
+    },
+    "note": "ACM KDD paper; Crossref stores the title as 'XGBoost' with the rest in a separate subtitle field, so a matcher must join title + subtitle."
+  },
+  {
+    "id": "R13",
+    "kind": "real",
+    "category": "conference",
+    "raw": "@inproceedings{abadi2016deep,\n  title={Deep Learning with Differential Privacy},\n  author={Abadi, Martin and Chu, Andy and Goodfellow, Ian and McMahan, H. Brendan and Mironov, Ilya and Talwar, Kunal and Zhang, Li},\n  booktitle={Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security},\n  pages={308--318},\n  year={2016},\n  publisher={ACM},\n  doi={10.1145/2976749.2978318}\n}",
+    "doi": "10.1145/2976749.2978318",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Deep Learning with Differential Privacy",
+      "authors": [
+        "Abadi",
+        "Chu",
+        "Goodfellow",
+        "McMahan",
+        "Mironov",
+        "Talwar",
+        "Zhang"
+      ],
+      "year": 2016,
+      "venue": "Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security",
+      "doi": "10.1145/2976749.2978318"
+    },
+    "note": "BibTeX @inproceedings for an ACM CCS paper; all fields match Crossref."
+  },
+  {
+    "id": "R14",
+    "kind": "real",
+    "category": "conference",
+    "raw": "Bender, E. M., Gebru, T., McMillan-Major, A., & Shmitchell, S. (2021). On the dangers of stochastic parrots: Can language models be too big? In Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency (pp. 610–623). Association for Computing Machinery. https://doi.org/10.1145/3442188.3445922",
+    "doi": "10.1145/3442188.3445922",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "On the Dangers of Stochastic Parrots: Can Language Models Be Too Big? 🦜",
+      "authors": [
+        "Bender",
+        "Gebru",
+        "McMillan-Major",
+        "Shmitchell"
+      ],
+      "year": 2021,
+      "venue": "Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency",
+      "doi": "10.1145/3442188.3445922"
+    },
+    "note": "ACM FAccT paper; Crossref splits title and subtitle (the subtitle also ends in a parrot emoji the student omitted)."
+  },
+  {
+    "id": "R15",
+    "kind": "real",
+    "category": "datacite",
+    "raw": "Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). Attention is all you need. arXiv. https://doi.org/10.48550/arXiv.1706.03762",
+    "doi": "10.48550/arXiv.1706.03762",
+    "expected": "verified",
+    "expectedFlags": [
+      "preprint"
+    ],
+    "truth": {
+      "title": "Attention Is All You Need",
+      "authors": [
+        "Vaswani",
+        "Shazeer",
+        "Parmar",
+        "Uszkoreit",
+        "Jones",
+        "Gomez",
+        "Kaiser",
+        "Polosukhin"
+      ],
+      "year": 2017,
+      "venue": "arXiv",
+      "doi": "10.48550/arXiv.1706.03762"
+    },
+    "note": "arXiv DOI registered with DataCite (absent from Crossref's API); metadata matches, and the item should carry a preprint flag."
+  },
+  {
+    "id": "R16",
+    "kind": "real",
+    "category": "datacite",
+    "raw": "Kingma, D. P., & Ba, J. (2014). Adam: A method for stochastic optimization (arXiv:1412.6980). arXiv. https://doi.org/10.48550/arXiv.1412.6980",
+    "doi": "10.48550/arXiv.1412.6980",
+    "expected": "verified",
+    "expectedFlags": [
+      "preprint"
+    ],
+    "truth": {
+      "title": "Adam: A Method for Stochastic Optimization",
+      "authors": [
+        "Kingma",
+        "Ba"
+      ],
+      "year": 2014,
+      "venue": "arXiv",
+      "doi": "10.48550/arXiv.1412.6980"
+    },
+    "note": "arXiv/DataCite DOI; title, authors and year 2014 match the DataCite record; preprint flag expected."
+  },
+  {
+    "id": "R17",
+    "kind": "real",
+    "category": "datacite",
+    "raw": "Reback, J., McKinney, W., jbrockmendel, Van den Bossche, J., Augspurger, T., Cloud, P., . . . Mehyar, M. (2020). pandas-dev/pandas: Pandas 1.0.3 (Version v1.0.3) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.3715232",
+    "doi": "10.5281/zenodo.3715232",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "pandas-dev/pandas: Pandas 1.0.3",
+      "authors": [
+        "Reback",
+        "McKinney",
+        "Jbrockmendel",
+        "Bossche",
+        "Augspurger",
+        "Cloud",
+        "Gfyoung",
+        "Sinhrks",
+        "Klein",
+        "Roeschke",
+        "Hawkins",
+        "Tratner",
+        "She",
+        "Ayd",
+        "Terji Petersen",
+        "Garcia",
+        "Schendel",
+        "Hayden",
+        "MomIsBestFriend",
+        "Jancauskas",
+        "Battiston",
+        "Skipper Seabold",
+        "Chris-B1",
+        "H-Vetinari",
+        "Hoyer",
+        "Overmeire",
+        "Alimcmaster1",
+        "Kaiqi Dong",
+        "Whelan",
+        "Mortada Mehyar"
+      ],
+      "year": 2020,
+      "venue": "Zenodo",
+      "doi": "10.5281/zenodo.3715232"
+    },
+    "note": "Zenodo software version DOI (DataCite); title, year and first creators match (DataCite creator list mixes real names and GitHub handles)."
+  },
+  {
+    "id": "R18",
+    "kind": "real",
+    "category": "datacite",
+    "raw": "Caswell, T. A., Droettboom, M., Lee, A., Hunter, J., Firing, E., Stansby, D., Klymak, J., Hoffmann, T., Andrade, E. S. D., Varoquaux, N., . . . Katins, J. (2020). matplotlib/matplotlib v3.1.3 (Version v3.1.3) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.3633844",
+    "doi": "10.5281/zenodo.3633844",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "matplotlib/matplotlib v3.1.3",
+      "authors": [
+        "Caswell",
+        "Droettboom",
+        "Lee",
+        "Hunter",
+        "Firing",
+        "Stansby",
+        "Klymak",
+        "Hoffmann",
+        "Andrade",
+        "Varoquaux",
+        "Nielsen",
+        "Root",
+        "Elson",
+        "May",
+        "Dale",
+        "Jae-Joon Lee",
+        "Seppänen",
+        "McDougall",
+        "Straw",
+        "Hobson",
+        "Gohlke",
+        "Yu",
+        "Ma",
+        "Vincent",
+        "Silvester",
+        "Moad",
+        "Kniazev",
+        "Ivanov",
+        "Ernest",
+        "Katins"
+      ],
+      "year": 2020,
+      "venue": "Zenodo",
+      "doi": "10.5281/zenodo.3633844"
+    },
+    "note": "Zenodo software version DOI (DataCite); title, year 2020 and creators match the DataCite record."
+  },
+  {
+    "id": "R19",
+    "kind": "real",
+    "category": "no-doi-journal",
+    "raw": "Breiman, L. (2001). Random forests. Machine Learning, 45(1), 5–32.",
+    "doi": null,
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Random Forests",
+      "authors": [
+        "Breiman"
+      ],
+      "year": 2001,
+      "venue": "Machine Learning",
+      "doi": "10.1023/A:1010933404324"
+    },
+    "note": "No DOI given, but Crossref bibliographic search returns the exact Springer record as the top hit."
+  },
+  {
+    "id": "R20",
+    "kind": "real",
+    "category": "no-doi-journal",
+    "raw": "Hochreiter, S. and Schmidhuber, J. (1997) 'Long short-term memory', Neural Computation, 9(8), pp. 1735–1780.",
+    "doi": null,
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Long Short-Term Memory",
+      "authors": [
+        "Hochreiter",
+        "Schmidhuber"
+      ],
+      "year": 1997,
+      "venue": "Neural Computation",
+      "doi": "10.1162/neco.1997.9.8.1735"
+    },
+    "note": "Harvard style without DOI; Crossref search top hit is the exact MIT Press record."
+  },
+  {
+    "id": "R21",
+    "kind": "real",
+    "category": "no-doi-journal",
+    "raw": "Cohen, J. (1960). A coefficient of agreement for nominal scales. Educational and Psychological Measurement, 20(1), 37–46.",
+    "doi": null,
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "A Coefficient of Agreement for Nominal Scales",
+      "authors": [
+        "Cohen"
+      ],
+      "year": 1960,
+      "venue": "Educational and Psychological Measurement",
+      "doi": "10.1177/001316446002000104"
+    },
+    "note": "No DOI given; Crossref search top hit is the exact SAGE record (title, author, year, volume, pages)."
+  },
+  {
+    "id": "R22",
+    "kind": "real",
+    "category": "no-doi-journal",
+    "raw": "Bandura, A. (1977). Self-efficacy: Toward a unifying theory of behavioral change. Psychological Review, 84(2), 191–215.",
+    "doi": null,
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Self-efficacy: Toward a unifying theory of behavioral change.",
+      "authors": [
+        "Bandura"
+      ],
+      "year": 1977,
+      "venue": "Psychological Review",
+      "doi": "10.1037/0033-295X.84.2.191"
+    },
+    "note": "No DOI given; Crossref search top hit is the APA record (a 1978 reprint in another journal also exists, but year and venue select the 1977 original)."
+  },
+  {
+    "id": "R23",
+    "kind": "real",
+    "category": "book-isbn",
+    "raw": "Kahneman, D. (2011). Thinking, fast and slow. Farrar, Straus and Giroux. ISBN 978-0-374-27563-1",
+    "doi": null,
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Thinking, fast and slow",
+      "authors": [
+        "Kahneman"
+      ],
+      "year": 2011,
+      "venue": "Farrar, Straus and Giroux",
+      "doi": null,
+      "isbn": "9780374275631"
+    },
+    "note": "Open Library ISBN record matches title, author (Daniel Kahneman), publisher and 2011."
+  },
+  {
+    "id": "R24",
+    "kind": "real",
+    "category": "book-isbn",
+    "raw": "Russell, S. J., & Norvig, P. (2020). Artificial intelligence: A modern approach (4th ed.). Pearson. ISBN 9780134610993",
+    "doi": null,
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Artificial Intelligence: A Modern Approach",
+      "authors": [
+        "Russell",
+        "Norvig"
+      ],
+      "year": 2020,
+      "venue": "Pearson",
+      "doi": null,
+      "isbn": "9780134610993"
+    },
+    "note": "Open Library ISBN record matches title/subtitle, authors (via author keys), Pearson and 2020."
+  },
+  {
+    "id": "R25",
+    "kind": "real",
+    "category": "book-isbn",
+    "raw": "Freire, P. (2000). Pedagogy of the oppressed (M. B. Ramos, Trans.; 30th anniversary ed.). Continuum. (Original work published 1970)",
+    "doi": null,
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Pedagogy of the oppressed",
+      "authors": [
+        "Freire"
+      ],
+      "year": 2000,
+      "venue": "Continuum",
+      "doi": null,
+      "isbn": "9780826412768"
+    },
+    "note": "Cited with publisher only (no ISBN/DOI); Open Library edition 9780826412768 matches title, author, Continuum, 2000 and the 30th anniversary edition."
+  },
+  {
+    "id": "R26",
+    "kind": "real",
+    "category": "minor-typo",
+    "raw": "Silver, D., Huang, A., Maddison, C. J., Guez, A., Sifre, L., van den Driessche, G., Schrittwieser, J., Antonoglou, I., Panneershelvam, V., Lanctot, M., Dieleman, S., Grewe, D., Nham, J., Kalchbrenner, N., Sutskever, I., Lillicrap, T., Leach, M., Kavukcuoglu, K., Graepel, T., & Hassabis, D. (2016). Mastering the game of Go with deep nueral networks and tree search. Nature, 529(7587), 484–489. https://doi.org/10.1038/nature16961",
+    "doi": "10.1038/nature16961",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Mastering the game of Go with deep neural networks and tree search",
+      "authors": [
+        "Silver",
+        "Huang",
+        "Maddison",
+        "Guez",
+        "Sifre",
+        "van den Driessche",
+        "Schrittwieser",
+        "Antonoglou",
+        "Panneershelvam",
+        "Lanctot",
+        "Dieleman",
+        "Grewe",
+        "Nham",
+        "Kalchbrenner",
+        "Sutskever",
+        "Lillicrap",
+        "Leach",
+        "Kavukcuoglu",
+        "Graepel",
+        "Hassabis"
+      ],
+      "year": 2016,
+      "venue": "Nature",
+      "doi": "10.1038/nature16961"
+    },
+    "note": "Correct DOI and metadata with one realistic title typo ('nueral'); should still verify."
+  },
+  {
+    "id": "R27",
+    "kind": "real",
+    "category": "minor-typo",
+    "raw": "Hopfield, J. J. (1982). Neural networks and physical systems with emergent collective computational abilities. Proc. Natl. Acad. Sci. USA, 79(8), 2554–2558.",
+    "doi": null,
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Neural networks and physical systems with emergent collective computational abilities.",
+      "authors": [
+        "Hopfield"
+      ],
+      "year": 1982,
+      "venue": "Proceedings of the National Academy of Sciences",
+      "doi": "10.1073/pnas.79.8.2554"
+    },
+    "note": "Abbreviated journal name (Crossref short title is 'Proc. Natl. Acad. Sci. U.S.A.'); Crossref search top hit is the exact record."
+  },
+  {
+    "id": "R28",
+    "kind": "real",
+    "category": "minor-typo",
+    "raw": "Baron, R. M., & Kenny, D. A. (1986). The moderator-mediator variable distinction in social pyschological research: Conceptual, strategic, and statistical considerations. J. Pers. Soc. Psychol., 51(6), 1173–1182.",
+    "doi": null,
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The moderator–mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations.",
+      "authors": [
+        "Baron",
+        "Kenny"
+      ],
+      "year": 1986,
+      "venue": "Journal of Personality and Social Psychology",
+      "doi": "10.1037/0022-3514.51.6.1173"
+    },
+    "note": "Misspelling ('pyschological'), ASCII hyphen instead of en dash and abbreviated journal; Crossref search still returns the exact APA record first."
+  },
+  {
+    "id": "R29",
+    "kind": "real",
+    "category": "retracted",
+    "raw": "Wakefield, A. J., Murch, S. H., Anthony, A., Linnell, J., Casson, D. M., Malik, M., Berelowitz, M., Dhillon, A. P., Thomson, M. A., Harvey, P., Valentine, A., Davies, S. E., & Walker-Smith, J. A. (1998). Ileal-lymphoid-nodular hyperplasia, non-specific colitis, and pervasive developmental disorder in children. The Lancet, 351(9103), 637–641. https://doi.org/10.1016/S0140-6736(97)11096-0",
+    "doi": "10.1016/S0140-6736(97)11096-0",
+    "expected": "verified",
+    "expectedFlags": [
+      "retracted"
+    ],
+    "truth": {
+      "title": "RETRACTED: Ileal-lymphoid-nodular hyperplasia, non-specific colitis, and pervasive developmental disorder in children",
+      "authors": [
+        "Wakefield",
+        "Murch",
+        "Anthony",
+        "Linnell",
+        "Casson",
+        "Malik",
+        "Berelowitz",
+        "Dhillon",
+        "Thomson",
+        "Harvey",
+        "Valentine",
+        "Davies",
+        "Walker-Smith"
+      ],
+      "year": 1998,
+      "venue": "The Lancet",
+      "doi": "10.1016/S0140-6736(97)11096-0"
+    },
+    "note": "Real record (registry title now prefixed 'RETRACTED:'); Crossref retraction notice 10.1016/S0140-6736(10)60175-4 (2010) and OpenAlex is_retracted=true, so verified + retracted flag."
+  },
+  {
+    "id": "R30",
+    "kind": "real",
+    "category": "retracted",
+    "raw": "Mehra, M. R., Desai, S. S., Kuy, S., Henry, T. D., & Patel, A. N. (2020). Cardiovascular disease, drug therapy, and mortality in Covid-19. New England Journal of Medicine, 382(25), e102. https://doi.org/10.1056/NEJMoa2007621",
+    "doi": "10.1056/NEJMoa2007621",
+    "expected": "verified",
+    "expectedFlags": [
+      "retracted"
+    ],
+    "truth": {
+      "title": "RETRACTED: Cardiovascular Disease, Drug Therapy, and Mortality in Covid-19",
+      "authors": [
+        "Mehra",
+        "Desai",
+        "Kuy",
+        "Henry",
+        "Patel"
+      ],
+      "year": 2020,
+      "venue": "New England Journal of Medicine",
+      "doi": "10.1056/NEJMoa2007621"
+    },
+    "note": "Real NEJM record (registry title prefixed 'RETRACTED:'); Crossref retraction notice 10.1056/NEJMc2021225 (June 2020) and OpenAlex is_retracted=true."
+  },
+  {
+    "id": "F01",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "Fernández, L., Okoye, B., & Hartmann, S. (2019). Learning analytics dashboards and student self-regulation in blended courses: A quasi-experimental study. Computers & Education, 141, 109871. https://doi.org/10.1016/j.compedu.2019.109871",
+    "doi": "10.1016/j.compedu.2019.109871",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Elsevier Computers & Education DOI pattern, but doi.org returns responseCode 100 / HTTP 404, so the reference is provably wrong."
+  },
+  {
+    "id": "F02",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "Lindgren, M., Achebe, T., & Rao, P. (2021). Prebunking misinformation through short-form video games: A randomized field experiment. Nature Human Behaviour, 5(11), 1487–1496. https://doi.org/10.1038/s41562-021-01187-4",
+    "doi": "10.1038/s41562-021-01187-4",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Well-formed Nature Human Behaviour DOI that is not registered at doi.org (404)."
+  },
+  {
+    "id": "F03",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "Kim, J., Patel, A., & Moreau, C. (2020). Designing conversational agents for exam revision: A field study with first-year students. In Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems (pp. 1–13). Association for Computing Machinery. https://doi.org/10.1145/3313831.3376999",
+    "doi": "10.1145/3313831.3376999",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Uses the real CHI 2020 proceedings DOI stem (10.1145/3313831.*) but this suffix is not registered (404)."
+  },
+  {
+    "id": "F04",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "Santos, R., & Yamamoto, K. (2020). Automated essay feedback using transformer models in secondary education. IEEE Transactions on Learning Technologies, 13(4), 812–824. https://doi.org/10.1109/TLT.2020.3018472",
+    "doi": "10.1109/TLT.2020.3018472",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "IEEE Transactions on Learning Technologies-style DOI that doi.org does not know (404)."
+  },
+  {
+    "id": "F05",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "Morgan, E., Haddad, R., & Liu, X. (2019). Sleep variability predicts exam performance independent of total sleep time. Psychological Science, 30(11), 1601–1612. https://doi.org/10.1177/0956797619873315",
+    "doi": "10.1177/0956797619873315",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "SAGE Psychological Science-style DOI that is not registered (404)."
+  },
+  {
+    "id": "F06",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "doi:10.1080/0144929X.2020.1773924",
+    "doi": "10.1080/0144929X.2020.1773924",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": null
+    },
+    "note": "Bare DOI with a real Taylor & Francis (Behaviour & Information Technology) prefix and pattern that returns 404 at doi.org."
+  },
+  {
+    "id": "F07",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "@article{adeyemi2021predicting,\n  title={Predicting MOOC dropout with explainable gradient boosting},\n  author={Adeyemi, Olusegun and Varga, Zsofia and Chen, Hao},\n  journal={Education and Information Technologies},\n  volume={26},\n  number={6},\n  pages={7215--7238},\n  year={2021},\n  doi={10.1007/s10639-021-10512-8}\n}",
+    "doi": "10.1007/s10639-021-10512-8",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "BibTeX entry with a Springer Education and Information Technologies DOI pattern that is not registered (404)."
+  },
+  {
+    "id": "F08",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "Rahman, S., Whitfield, J. A., Costa, M., & Brennan, P. (2021). Low-dose aspirin for the prevention of post-acute sequelae of Covid-19 in outpatients. New England Journal of Medicine, 385(14), 1301–1311. https://doi.org/10.1056/NEJMoa2108417",
+    "doi": "10.1056/NEJMoa2108417",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "NEJM original-article DOI pattern (NEJMoa21xxxxx) that is not registered (404)."
+  },
+  {
+    "id": "F09",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "Okonkwo, C., & Rahman, S. (2021). Chatbot tutors and self-regulated learning in undergraduate programming courses. British Journal of Educational Technology, 52(4), 1629–1645. https://doi.org/10.1111/bjet.13105",
+    "doi": "10.1111/bjet.13105",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The dynamic mix of heutagogy and technology: Preparing learners for lifelong learning",
+      "authors": [
+        "Blaschke"
+      ],
+      "year": 2021,
+      "venue": "British Journal of Educational Technology",
+      "doi": "10.1111/bjet.13105"
+    },
+    "note": "DOI exists but belongs to Blaschke (2021) on heutagogy in the same journal issue; title and authors are completely different."
+  },
+  {
+    "id": "F10",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "Chen, L., & Morales, D. (2021). Minimum wage increases and the automation of routine jobs. The Quarterly Journal of Economics, 136(2), 727–781. https://doi.org/10.1093/qje/qjaa041",
+    "doi": "10.1093/qje/qjaa041",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Sweat Equity in U.S. Private Business*",
+      "authors": [
+        "Bhandari",
+        "McGrattan"
+      ],
+      "year": 2020,
+      "venue": "The Quarterly Journal of Economics",
+      "doi": "10.1093/qje/qjaa041"
+    },
+    "note": "DOI resolves to Bhandari & McGrattan, 'Sweat Equity in U.S. Private Business' (QJE), a different paper despite the matching volume and pages."
+  },
+  {
+    "id": "F11",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "Williams, R., Patel, N. and O'Connor, J. (2020) 'Effectiveness of community mask mandates on SARS-CoV-2 transmission: systematic review and meta-analysis', BMJ, 371, m4521. doi:10.1136/bmj.m4521.",
+    "doi": "10.1136/bmj.m4521",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Isolated periocular oedema",
+      "authors": [
+        "Toth",
+        "Abad"
+      ],
+      "year": 2020,
+      "venue": "BMJ",
+      "doi": "10.1136/bmj.m4521"
+    },
+    "note": "Harvard style; the DOI is real but is the BMJ case report 'Isolated periocular oedema' (Toth & Abad, 2020)."
+  },
+  {
+    "id": "F12",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "Garcia, M., & Lindholm, E. (2022). Long-term cognitive outcomes in adolescents after mild COVID-19: A prospective cohort study. PLOS Medicine, 19(1), e1003871. https://doi.org/10.1371/journal.pmed.1003871",
+    "doi": "10.1371/journal.pmed.1003871",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Overall and cause-specific hospitalisation and death after COVID-19 hospitalisation in England: A cohort study using linked primary care, secondary care, and death registration data in the OpenSAFELY platform",
+      "authors": [
+        "Bhaskaran",
+        "Rentsch",
+        "Hickman",
+        "Hulme",
+        "Schultze",
+        "Curtis",
+        "Wing",
+        "Warren-Gash",
+        "Tomlinson",
+        "Bates",
+        "Mathur",
+        "MacKenna",
+        "Mahalingasivam",
+        "Wong",
+        "Walker",
+        "Morton",
+        "Grint",
+        "Mehrkar",
+        "Eggo",
+        "Inglesby",
+        "Douglas",
+        "McDonald",
+        "Cockburn",
+        "Williamson",
+        "Evans",
+        "Parry",
+        "Hester",
+        "Harper",
+        "Evans",
+        "Bacon",
+        "Smeeth",
+        "Goldacre"
+      ],
+      "year": 2022,
+      "venue": "PLOS Medicine",
+      "doi": "10.1371/journal.pmed.1003871"
+    },
+    "note": "The DOI is real but belongs to Bhaskaran et al. (2022), an OpenSAFELY cohort of adults after COVID-19 hospitalisation; different title and authors."
+  },
+  {
+    "id": "F13",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "Zhang, Y., Kumar, P., & Svensson, A. (2020). Large language models as scientific reasoners: Benchmarks and limitations. Nature, 585(7825), 357–362. https://doi.org/10.1038/s41586-020-2649-2",
+    "doi": "10.1038/s41586-020-2649-2",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Array programming with NumPy",
+      "authors": [
+        "Harris",
+        "Millman",
+        "van der Walt",
+        "Gommers",
+        "Virtanen",
+        "Cournapeau",
+        "Wieser",
+        "Taylor",
+        "Berg",
+        "Smith",
+        "Kern",
+        "Picus",
+        "Hoyer",
+        "van Kerkwijk",
+        "Brett",
+        "Haldane",
+        "del Río",
+        "Wiebe",
+        "Peterson",
+        "Gérard-Marchant",
+        "Sheppard",
+        "Reddy",
+        "Weckesser",
+        "Abbasi",
+        "Gohlke",
+        "Oliphant"
+      ],
+      "year": 2020,
+      "venue": "Nature",
+      "doi": "10.1038/s41586-020-2649-2"
+    },
+    "note": "The DOI is Harris et al. (2020) 'Array programming with NumPy'; the cited title and authors do not match."
+  },
+  {
+    "id": "F14",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "Twenge, J. M., & Haidt, J. (2018). Social media exposure and adolescent depression: A longitudinal analysis. Science, 359(6380), 1146–1151. https://doi.org/10.1126/science.aap9559",
+    "doi": "10.1126/science.aap9559",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The spread of true and false news online",
+      "authors": [
+        "Vosoughi",
+        "Roy",
+        "Aral"
+      ],
+      "year": 2018,
+      "venue": "Science",
+      "doi": "10.1126/science.aap9559"
+    },
+    "note": "Real famous authors and a real DOI, but the DOI is Vosoughi, Roy & Aral (2018) 'The spread of true and false news online'."
+  },
+  {
+    "id": "F15",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "Thompson, H., & Nguyen, B. (2013). Smartphone notifications impair working memory in university students. PLoS ONE, 8(8), e69841. https://doi.org/10.1371/journal.pone.0069841",
+    "doi": "10.1371/journal.pone.0069841",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Facebook Use Predicts Declines in Subjective Well-Being in Young Adults",
+      "authors": [
+        "Kross",
+        "Verduyn",
+        "Demiralp",
+        "Park",
+        "Lee",
+        "Lin",
+        "Shablack",
+        "Jonides",
+        "Ybarra"
+      ],
+      "year": 2013,
+      "venue": "PLoS ONE",
+      "doi": "10.1371/journal.pone.0069841"
+    },
+    "note": "The DOI is Kross et al. (2013) 'Facebook use predicts declines in subjective well-being in young adults'; a different paper."
+  },
+  {
+    "id": "F16",
+    "kind": "fake",
+    "category": "fabricated-no-doi",
+    "raw": "Hinton, G. E., & LeCun, Y. (2019). Gradient-free learning and the limits of backpropagation in biological brains. Trends in Cognitive Sciences, 23(8), 641–655.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": null,
+    "note": "Invented title with real famous authors and a real journal; no DOI, and neither Crossref nor OpenAlex search finds a close match, so it cannot be proven fake (amber)."
+  },
+  {
+    "id": "F17",
+    "kind": "fake",
+    "category": "fabricated-no-doi",
+    "raw": "Kahneman, D. and Thaler, R.H. (2008) 'Anchoring effects in online consumer pricing decisions', Journal of Behavioral Decision Making, 21(4), pp. 389–406.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": null,
+    "note": "Harvard-style invented paper by real authors; no DOI and no close Crossref/OpenAlex match, so unconfirmable rather than provably wrong."
+  },
+  {
+    "id": "F18",
+    "kind": "fake",
+    "category": "fabricated-no-doi",
+    "raw": "Patel, R., Okafor, C., & Lindqvist, M. (2021). Peer feedback loops and metacognitive gains in flipped secondary classrooms. Journal of Educational Psychology, 113(6), 1120–1137.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": null,
+    "note": "Invented education paper with plausible authors; no DOI and no close match in Crossref or OpenAlex."
+  },
+  {
+    "id": "F19",
+    "kind": "fake",
+    "category": "fabricated-no-doi",
+    "raw": "Zhao, L., & Fernandes, M. (2022). Gamified retrieval practice reduces exam anxiety in undergraduate chemistry. Journal of Chemical Education, 99(3), 1345–1353.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": null,
+    "note": "Invented title; the nearest Crossref hit is a different J. Chem. Educ. paper on two-stage testing (Rempel et al., 2021), not a match."
+  },
+  {
+    "id": "F20",
+    "kind": "fake",
+    "category": "fabricated-no-doi",
+    "raw": "Dweck, C. S., & Duckworth, A. L. (2017). Growth mindset, grit, and academic persistence in low-income adolescents: A three-year longitudinal study. Child Development, 88(5), 1502–1519.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": null,
+    "note": "Invented title with real authors; the nearest hits (e.g., Park et al., 2020, J. Exp. Child Psychol.) differ in title, authors, year and venue."
+  },
+  {
+    "id": "F21",
+    "kind": "fake",
+    "category": "fabricated-no-doi",
+    "raw": "@article{acemoglu2020algorithmic,\n  title={Algorithmic management and wage inequality in platform labor markets},\n  author={Acemoglu, Daron and Autor, David},\n  journal={Journal of Labor Economics},\n  volume={38},\n  number={4},\n  pages={1021--1060},\n  year={2020}\n}",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": null,
+    "note": "BibTeX for an invented paper by real economists; no DOI and no close Crossref/OpenAlex match."
+  },
+  {
+    "id": "F22",
+    "kind": "fake",
+    "category": "wrong-year-venue",
+    "raw": "Hinton, G. E., & Salakhutdinov, R. R. (2010). Reducing the dimensionality of data with neural networks. Nature, 466(7305), 504–507.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Reducing the Dimensionality of Data with Neural Networks",
+      "authors": [
+        "Hinton",
+        "Salakhutdinov"
+      ],
+      "year": 2006,
+      "venue": "Science",
+      "doi": "10.1126/science.1127647"
+    },
+    "note": "Real paper (exact title and authors) but it appeared in Science in 2006, not Nature 2010: year off by 4 and wrong venue."
+  },
+  {
+    "id": "F23",
+    "kind": "fake",
+    "category": "wrong-year-venue",
+    "raw": "Kahneman, D., & Tversky, A. (1985). Prospect theory: An analysis of decision under risk. American Economic Review, 75(2), 263–291.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Prospect Theory: An Analysis of Decision under Risk",
+      "authors": [
+        "Kahneman",
+        "Tversky"
+      ],
+      "year": 1979,
+      "venue": "Econometrica",
+      "doi": "10.2307/1914185"
+    },
+    "note": "Real paper, but published in Econometrica in 1979 (reprints exist as a 1977 report and a 2000 book chapter); the 1985 American Economic Review attribution is wrong."
+  },
+  {
+    "id": "F24",
+    "kind": "fake",
+    "category": "wrong-year-venue",
+    "raw": "Allcott, H., & Gentzkow, M. (2020). Social media and fake news in the 2016 election. Journal of Political Economy, 128(3), 211–236.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Social Media and Fake News in the 2016 Election",
+      "authors": [
+        "Allcott",
+        "Gentzkow"
+      ],
+      "year": 2017,
+      "venue": "Journal of Economic Perspectives",
+      "doi": "10.1257/jep.31.2.211"
+    },
+    "note": "Real paper, but published in the Journal of Economic Perspectives in 2017 (the NBER working paper is also 2017): year off by 3 and wrong venue."
+  },
+  {
+    "id": "F25",
+    "kind": "fake",
+    "category": "wrong-year-venue",
+    "raw": "Watts, D. J., & Strogatz, S. H. (2001). Collective dynamics of 'small-world' networks. Science, 393(6684), 440–442. https://doi.org/10.1038/30918",
+    "doi": "10.1038/30918",
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Collective dynamics of ‘small-world’ networks",
+      "authors": [
+        "Watts",
+        "Strogatz"
+      ],
+      "year": 1998,
+      "venue": "Nature",
+      "doi": "10.1038/30918"
+    },
+    "note": "The DOI is correct and resolves to this same paper, but it is Nature 1998, not Science 2001; same paper with wrong year and venue is amber, not red."
+  },
+  {
+    "id": "F26",
+    "kind": "fake",
+    "category": "wrong-year-venue",
+    "raw": "Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A. A., Veness, J., Bellemare, M. G., Graves, A., Riedmiller, M., Fidjeland, A. K., Ostrovski, G., Petersen, S., Beattie, C., Sadik, A., Antonoglou, I., King, H., Kumaran, D., Wierstra, D., Legg, S., & Hassabis, D. (2012). Human-level control through deep reinforcement learning. Nature, 518(7540), 529–533. https://doi.org/10.1038/nature14236",
+    "doi": "10.1038/nature14236",
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Human-level control through deep reinforcement learning",
+      "authors": [
+        "Mnih",
+        "Kavukcuoglu",
+        "Silver",
+        "Rusu",
+        "Veness",
+        "Bellemare",
+        "Graves",
+        "Riedmiller",
+        "Fidjeland",
+        "Ostrovski",
+        "Petersen",
+        "Beattie",
+        "Sadik",
+        "Antonoglou",
+        "King",
+        "Kumaran",
+        "Wierstra",
+        "Legg",
+        "Hassabis"
+      ],
+      "year": 2015,
+      "venue": "Nature",
+      "doi": "10.1038/nature14236"
+    },
+    "note": "Everything matches the DOI's record except the year (2012 vs 2015, off by 3), which the rules treat as amber."
+  },
+  {
+    "id": "F27",
+    "kind": "fake",
+    "category": "chimera",
+    "raw": "Bengio, Y. (2021). Causal representation priors for robust continual learning. Nature Machine Intelligence, 3(9), 744–753. https://doi.org/10.1038/s42256-021-00399-z",
+    "doi": "10.1038/s42256-021-00399-z",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Real author + real journal + invented title; the Nature Machine Intelligence-style DOI returns 404 (the nearest real work, 'Toward Causal Representation Learning', Proc. IEEE 2021, is a different paper)."
+  },
+  {
+    "id": "F28",
+    "kind": "fake",
+    "category": "chimera",
+    "raw": "Duckworth, A. L., & Gross, J. J. (2021). Self-control scaffolds and smartphone use during adolescent homework. Psychological Science, 32(9), 1412–1425. https://doi.org/10.1177/09567976211017899",
+    "doi": "10.1177/09567976211017899",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Real authors and journal, invented title, and a Psychological Science-style DOI that returns 404."
+  },
+  {
+    "id": "F29",
+    "kind": "fake",
+    "category": "chimera",
+    "raw": "Topol, E. J. (2023). Generative AI and the future of the clinical note. The Lancet, 402(10406), 1001–1003. https://doi.org/10.1016/S0140-6736(23)01984-7",
+    "doi": "10.1016/S0140-6736(23)01984-7",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Real author who publishes on AI in The Lancet, invented title, and a Lancet-format DOI that returns 404."
+  },
+  {
+    "id": "F30",
+    "kind": "fake",
+    "category": "chimera",
+    "raw": "Ioannidis, J. P. A. (2020). Reproducibility of COVID-19 prognostic models: A meta-research audit. JAMA, 324(22), 2271–2273. https://doi.org/10.1001/jama.2020.21894",
+    "doi": "10.1001/jama.2020.21894",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Real author and journal, invented title, and a JAMA-format DOI that returns 404."
+  }
+]

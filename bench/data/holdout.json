@@ -1,0 +1,794 @@
+[
+  {
+    "id": "H01",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Chetty, R., Hendren, N., Kline, P., & Saez, E. (2014). Where is the land of opportunity? The geography of intergenerational mobility in the United States. The Quarterly Journal of Economics, 129(4), 1553–1623. https://doi.org/10.1093/qje/qju022",
+    "doi": "10.1093/qje/qju022",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Where is the land of Opportunity? The Geography of Intergenerational Mobility in the United States *",
+      "authors": [
+        "Chetty",
+        "Hendren",
+        "Kline",
+        "Saez"
+      ],
+      "year": 2014,
+      "venue": "The Quarterly Journal of Economics",
+      "doi": "10.1093/qje/qju022"
+    },
+    "note": "Economics, APA 7: Crossref/OUP record matches title, all four authors, 2014 and QJE 129(4):1553-1623 (registry title carries a trailing footnote asterisk)."
+  },
+  {
+    "id": "H02",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Aiken, L. H., Sloane, D. M., Bruyneel, L., Van den Heede, K., Griffiths, P., Busse, R., Diomidous, M., Kinnunen, J., Kózka, M., Lesaffre, E., McHugh, M. D., Moreno-Casbas, M. T., Rafferty, A. M., Schwendimann, R., Scott, P. A., Tishelman, C., van Achterberg, T., & Sermeus, W. (2014). Nurse staffing and education and hospital mortality in nine European countries: A retrospective observational study. The Lancet, 383(9931), 1824–1830. https://doi.org/10.1016/S0140-6736(13)62631-8",
+    "doi": "10.1016/S0140-6736(13)62631-8",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Nurse staffing and education and hospital mortality in nine European countries: a retrospective observational study",
+      "authors": [
+        "Aiken",
+        "Sloane",
+        "Bruyneel",
+        "Van den Heede",
+        "Griffiths",
+        "Busse",
+        "Diomidous",
+        "Kinnunen",
+        "Kózka",
+        "Lesaffre",
+        "McHugh",
+        "Moreno-Casbas",
+        "Rafferty",
+        "Schwendimann",
+        "Scott",
+        "Tishelman",
+        "van Achterberg",
+        "Sermeus"
+      ],
+      "year": 2014,
+      "venue": "The Lancet",
+      "doi": "10.1016/S0140-6736(13)62631-8"
+    },
+    "note": "Nursing, APA 7 with all 18 authors (incl. Kózka, particle names 'Van den Heede'/'van Achterberg'); Crossref record matches title, authors, 2014, Lancet 383(9931):1824-1830."
+  },
+  {
+    "id": "H03",
+    "kind": "real",
+    "category": "diacritics",
+    "raw": "Rockström, J., Steffen, W., Noone, K., Persson, Å., Chapin, F. S., III, Lambin, E. F., Lenton, T. M., Scheffer, M., Folke, C., Schellnhuber, H. J., Nykvist, B., de Wit, C. A., Hughes, T., van der Leeuw, S., Rodhe, H., Sörlin, S., Snyder, P. K., Costanza, R., Svedin, U., . . . Foley, J. A. (2009). A safe operating space for humanity. Nature, 461(7263), 472–475. https://doi.org/10.1038/461472a",
+    "doi": "10.1038/461472a",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "A safe operating space for humanity",
+      "authors": [
+        "Rockström",
+        "Steffen",
+        "Noone",
+        "Persson",
+        "Chapin",
+        "Lambin",
+        "Lenton",
+        "Scheffer",
+        "Folke",
+        "Schellnhuber",
+        "Nykvist",
+        "de Wit",
+        "Hughes",
+        "van der Leeuw",
+        "Rodhe",
+        "Sörlin",
+        "Snyder",
+        "Costanza",
+        "Svedin",
+        "Falkenmark",
+        "Karlberg",
+        "Corell",
+        "Fabry",
+        "Hansen",
+        "Walker",
+        "Liverman",
+        "Richardson",
+        "Crutzen",
+        "Foley"
+      ],
+      "year": 2009,
+      "venue": "Nature",
+      "doi": "10.1038/461472a"
+    },
+    "note": "Environmental science, APA 7 (first 19 authors + ellipsis + last of 29); Swedish diacritic first author (Rockström, also Å/ö in list) matches the Crossref record exactly."
+  },
+  {
+    "id": "H04",
+    "kind": "real",
+    "category": "org-author",
+    "raw": "OECD. (2019). PISA 2018 results (Volume I): What students know and can do. OECD Publishing. https://doi.org/10.1787/5f07c754-en",
+    "doi": "10.1787/5f07c754-en",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "PISA 2018 Results (Volume I): What Students Know and Can Do",
+      "authors": [
+        "OECD"
+      ],
+      "year": 2019,
+      "venue": "OECD Publishing",
+      "doi": "10.1787/5f07c754-en"
+    },
+    "note": "Organisation as author (education policy report), APA 7: Crossref record (type book, series 'PISA') lists the organisation 'OECD' as sole author, 2019-12-03, OECD Publishing."
+  },
+  {
+    "id": "H05",
+    "kind": "real",
+    "category": "book-chapter",
+    "raw": "Ajzen, I. (1985). From intentions to actions: A theory of planned behavior. In J. Kuhl & J. Beckmann (Eds.), Action control: From cognition to behavior (pp. 11–39). Springer. https://doi.org/10.1007/978-3-642-69746-3_2",
+    "doi": "10.1007/978-3-642-69746-3_2",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "From Intentions to Actions: A Theory of Planned Behavior",
+      "authors": [
+        "Ajzen"
+      ],
+      "year": 1985,
+      "venue": "Action Control",
+      "doi": "10.1007/978-3-642-69746-3_2"
+    },
+    "note": "Chapter in an edited book (health-behaviour/psychology theory widely cited in nursing), APA 7: Springer book-chapter record matches title, author, 1985, pp. 11-39 (registry container title is the short 'Action Control'; editors are not in the registry)."
+  },
+  {
+    "id": "H06",
+    "kind": "real",
+    "category": "retracted",
+    "raw": "LaCour, M. J., & Green, D. P. (2014). When contact changes minds: An experiment on transmission of support for gay equality. Science, 346(6215), 1366–1369. https://doi.org/10.1126/science.1256151",
+    "doi": "10.1126/science.1256151",
+    "expected": "verified",
+    "expectedFlags": [
+      "retracted"
+    ],
+    "truth": {
+      "title": "When contact changes minds: An experiment on transmission of support for gay equality",
+      "authors": [
+        "LaCour",
+        "Green"
+      ],
+      "year": 2014,
+      "venue": "Science",
+      "doi": "10.1126/science.1256151"
+    },
+    "note": "Political science, APA 7: real record matches, but Crossref filter=updates returns retraction notice 10.1126/science.aac6638 ('Editorial retraction', 2015-06-05) and the work's updated-by lists type retraction, so verified + retracted flag."
+  },
+  {
+    "id": "H07",
+    "kind": "real",
+    "category": "datacite",
+    "raw": "Rolnick, D., Donti, P. L., Kaack, L. H., Kochanski, K., Lacoste, A., Sankaran, K., Ross, A. S., Milojevic-Dupont, N., Jaques, N., Waldman-Brown, A., Luccioni, A., Maharaj, T., Sherwin, E. D., Mukkavilli, S. K., Kording, K. P., Gomes, C., Ng, A. Y., Hassabis, D., Platt, J. C., . . . Bengio, Y. (2019). Tackling climate change with machine learning (arXiv:1906.05433). arXiv. https://doi.org/10.48550/arXiv.1906.05433",
+    "doi": "10.48550/arXiv.1906.05433",
+    "expected": "verified",
+    "expectedFlags": [
+      "preprint"
+    ],
+    "truth": {
+      "title": "Tackling Climate Change with Machine Learning",
+      "authors": [
+        "Rolnick",
+        "Donti",
+        "Kaack",
+        "Kochanski",
+        "Lacoste",
+        "Sankaran",
+        "Ross",
+        "Milojevic-Dupont",
+        "Jaques",
+        "Waldman-Brown",
+        "Luccioni",
+        "Maharaj",
+        "Sherwin",
+        "Mukkavilli",
+        "Kording",
+        "Gomes",
+        "Ng",
+        "Hassabis",
+        "Platt",
+        "Creutzig",
+        "Chayes",
+        "Bengio"
+      ],
+      "year": 2019,
+      "venue": "arXiv",
+      "doi": "10.48550/arXiv.1906.05433"
+    },
+    "note": "Environmental science preprint, APA 7 (19 + ellipsis + last of 22 authors): arXiv DOI exists at doi.org (responseCode 1, DataCite CSL record, 2019); should carry the preprint flag."
+  },
+  {
+    "id": "H08",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Polit, D. F., & Beck, C. T. (2006). The content validity index: Are you sure you know what's being reported? Critique and recommendations. Research in Nursing & Health, 29(5), 489–497. https://doi.org/10.1002/nur.20147",
+    "doi": "10.1002/nur.20147",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The content validity index: Are you sure you know what's being reported? critique and recommendations",
+      "authors": [
+        "Polit",
+        "Beck"
+      ],
+      "year": 2006,
+      "venue": "Research in Nursing & Health",
+      "doi": "10.1002/nur.20147"
+    },
+    "note": "Nursing research methods, APA 7: Wiley record matches title, both authors, 2006 and RNH 29(5):489-497."
+  },
+  {
+    "id": "H09",
+    "kind": "real",
+    "category": "diacritics",
+    "raw": "Lévi-Strauss, Claude. \"The Structural Study of Myth.\" The Journal of American Folklore, vol. 68, no. 270, 1955, pp. 428–44. JSTOR, https://doi.org/10.2307/536768.",
+    "doi": "10.2307/536768",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The Structural Study of Myth",
+      "authors": [
+        "Levi-Strauss"
+      ],
+      "year": 1955,
+      "venue": "The Journal of American Folklore",
+      "doi": "10.2307/536768"
+    },
+    "note": "Humanities/anthropology, MLA 9 with quoted title: the citation spells 'Lévi-Strauss' but the Crossref/JSTOR record stores 'Levi-Strauss' without the accent, so author matching must normalise diacritics; title, 1955 and JAF 68(270) match."
+  },
+  {
+    "id": "H10",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Mulvey, Laura. \"Visual Pleasure and Narrative Cinema.\" Screen, vol. 16, no. 3, Autumn 1975, pp. 6–18, https://doi.org/10.1093/screen/16.3.6.",
+    "doi": "10.1093/screen/16.3.6",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Visual Pleasure and Narrative Cinema",
+      "authors": [
+        "Mulvey"
+      ],
+      "year": 1975,
+      "venue": "Screen",
+      "doi": "10.1093/screen/16.3.6"
+    },
+    "note": "Film studies, MLA 9: OUP record matches title, author, 1975 and Screen 16(3):6-18."
+  },
+  {
+    "id": "H11",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Crenshaw, Kimberlé. \"Mapping the Margins: Intersectionality, Identity Politics, and Violence against Women of Color.\" Stanford Law Review, vol. 43, no. 6, 1991, pp. 1241–99. JSTOR, https://doi.org/10.2307/1229039.",
+    "doi": "10.2307/1229039",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Mapping the Margins: Intersectionality, Identity Politics, and Violence against Women of Color",
+      "authors": [
+        "Crenshaw"
+      ],
+      "year": 1991,
+      "venue": "Stanford Law Review",
+      "doi": "10.2307/1229039"
+    },
+    "note": "Law, MLA 9 (abbreviated page range 1241-99): JSTOR DOI record matches title, author, 1991 and Stanford Law Review 43(6)."
+  },
+  {
+    "id": "H12",
+    "kind": "real",
+    "category": "no-doi-journal",
+    "raw": "White, Hayden. \"The Value of Narrativity in the Representation of Reality.\" Critical Inquiry, vol. 7, no. 1, 1980, pp. 5–27.",
+    "doi": null,
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The Value of Narrativity in the Representation of Reality",
+      "authors": [
+        "White"
+      ],
+      "year": 1980,
+      "venue": "Critical Inquiry",
+      "doi": "10.1086/448086"
+    },
+    "note": "Humanities/historiography, MLA 9 without a DOI: Crossref bibliographic search returns the exact University of Chicago Press record (10.1086/448086) as the top hit with a wide score margin."
+  },
+  {
+    "id": "H13",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "[1] C. E. Shannon, \"A mathematical theory of communication,\" Bell Syst. Tech. J., vol. 27, no. 3, pp. 379–423, Jul. 1948, doi: 10.1002/j.1538-7305.1948.tb01338.x.",
+    "doi": "10.1002/j.1538-7305.1948.tb01338.x",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "A Mathematical Theory of Communication",
+      "authors": [
+        "Shannon"
+      ],
+      "year": 1948,
+      "venue": "Bell System Technical Journal",
+      "doi": "10.1002/j.1538-7305.1948.tb01338.x"
+    },
+    "note": "Engineering, IEEE style with abbreviated journal name: record matches title, author, 1948 and BSTJ 27(3):379-423."
+  },
+  {
+    "id": "H14",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "[2] R. E. Kalman, \"A new approach to linear filtering and prediction problems,\" J. Basic Eng., vol. 82, no. 1, pp. 35–45, Mar. 1960, doi: 10.1115/1.3662552.",
+    "doi": "10.1115/1.3662552",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "A New Approach to Linear Filtering and Prediction Problems",
+      "authors": [
+        "Kalman"
+      ],
+      "year": 1960,
+      "venue": "Journal of Basic Engineering",
+      "doi": "10.1115/1.3662552"
+    },
+    "note": "Engineering (control), IEEE style: ASME record matches title, author, 1960 and J. Basic Eng. 82(1):35-45."
+  },
+  {
+    "id": "H15",
+    "kind": "real",
+    "category": "conference",
+    "raw": "[3] F. Bonomi, R. Milito, J. Zhu, and S. Addepalli, \"Fog computing and its role in the internet of things,\" in Proc. 1st Ed. MCC Workshop Mobile Cloud Comput. (MCC '12), Helsinki, Finland, Aug. 2012, pp. 13–16, doi: 10.1145/2342509.2342513.",
+    "doi": "10.1145/2342509.2342513",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Fog computing and its role in the internet of things",
+      "authors": [
+        "Bonomi",
+        "Milito",
+        "Zhu",
+        "Addepalli"
+      ],
+      "year": 2012,
+      "venue": "Proceedings of the first edition of the MCC workshop on Mobile cloud computing",
+      "doi": "10.1145/2342509.2342513"
+    },
+    "note": "Engineering conference paper, IEEE style with abbreviated proceedings name: ACM proceedings-article record matches title, four authors, 2012, pp. 13-16."
+  },
+  {
+    "id": "H16",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "[4] N. Otsu, \"A threshold selection method from gray-level histograms,\" IEEE Trans. Syst., Man, Cybern., vol. SMC-9, no. 1, pp. 62–66, Jan. 1979, doi: 10.1109/TSMC.1979.4310076.",
+    "doi": "10.1109/TSMC.1979.4310076",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "A Threshold Selection Method from Gray-Level Histograms",
+      "authors": [
+        "Otsu"
+      ],
+      "year": 1979,
+      "venue": "IEEE Transactions on Systems, Man, and Cybernetics",
+      "doi": "10.1109/TSMC.1979.4310076"
+    },
+    "note": "Engineering, IEEE style (volume written 'SMC-9', registry says 9): record matches title, author, 1979, pp. 62-66."
+  },
+  {
+    "id": "H17",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Hardin, G. (1968) 'The tragedy of the commons', Science, 162(3859), pp. 1243–1248. doi:10.1126/science.162.3859.1243.",
+    "doi": "10.1126/science.162.3859.1243",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The Tragedy of the Commons",
+      "authors": [
+        "Hardin"
+      ],
+      "year": 1968,
+      "venue": "Science",
+      "doi": "10.1126/science.162.3859.1243"
+    },
+    "note": "Environmental science, Harvard style with 'doi:' prefix: AAAS record matches title, author, 1968 and 162(3859):1243-1248."
+  },
+  {
+    "id": "H18",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Warren, S.D. and Brandeis, L.D. (1890) 'The right to privacy', Harvard Law Review, 4(5), pp. 193–220. Available at: https://doi.org/10.2307/1321160.",
+    "doi": "10.2307/1321160",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The Right to Privacy",
+      "authors": [
+        "Warren",
+        "Brandeis"
+      ],
+      "year": 1890,
+      "venue": "Harvard Law Review",
+      "doi": "10.2307/1321160"
+    },
+    "note": "Law, Harvard style: JSTOR DOI record matches title, both authors, 1890 and Harvard Law Review 4(5)."
+  },
+  {
+    "id": "H19",
+    "kind": "real",
+    "category": "crossref-journal",
+    "raw": "Akerlof, George A. 1970. \"The Market for 'Lemons': Quality Uncertainty and the Market Mechanism.\" Quarterly Journal of Economics 84 (3): 488–500. https://doi.org/10.2307/1879431.",
+    "doi": "10.2307/1879431",
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The Market for \"Lemons\": Quality Uncertainty and the Market Mechanism",
+      "authors": [
+        "Akerlof"
+      ],
+      "year": 1970,
+      "venue": "The Quarterly Journal of Economics",
+      "doi": "10.2307/1879431"
+    },
+    "note": "Economics, Chicago author-date (nested single quotes in title, venue without leading 'The'): record matches title, author, 1970 and QJE 84(3)."
+  },
+  {
+    "id": "H20",
+    "kind": "real",
+    "category": "no-doi-journal",
+    "raw": "Coase, R. H. 1960. \"The Problem of Social Cost.\" Journal of Law and Economics 3 (October): 1–44.",
+    "doi": null,
+    "expected": "verified",
+    "expectedFlags": [],
+    "truth": {
+      "title": "The Problem of Social Cost",
+      "authors": [
+        "Coase"
+      ],
+      "year": 1960,
+      "venue": "The Journal of Law and Economics",
+      "doi": "10.1086/466560"
+    },
+    "note": "Law and economics, Chicago author-date without DOI: Crossref bibliographic search returns the exact J. Law & Econ. record 10.1086/466560 as top hit (a 1960-dated reprint chapter ranks second)."
+  },
+  {
+    "id": "H21",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "Lindahl, K., Mwangi, P., & Ortega, S. (2021). Microplastic retention in constructed wetlands treating urban stormwater: A two-year field study. Journal of Environmental Management, 291, 119874. https://doi.org/10.1016/j.jenvman.2021.119874",
+    "doi": "10.1016/j.jenvman.2021.119874",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Environmental science, APA 7: Elsevier J. Environ. Manage. DOI pattern, but doi.org returns responseCode 100 / HTTP 404; Crossref search finds no close title."
+  },
+  {
+    "id": "H22",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "Murphy, C., Adeleke, F. and Byrne, T. (2019) 'Simulation-based debriefing and clinical judgement in second-year nursing students: a mixed-methods evaluation', Nurse Education Today, 83, 109215. doi:10.1016/j.nedt.2019.109215.",
+    "doi": "10.1016/j.nedt.2019.109215",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Nursing, Harvard: Elsevier Nurse Education Today DOI pattern returns responseCode 100 / HTTP 404; nearest search hits are different papers (e.g. Lavoie et al. 2017), so provably wrong."
+  },
+  {
+    "id": "H23",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "Ferreira, Ana Lúcia, and Tomasz Wójcik. \"Climate Displacement and the Limits of Non-Refoulement under International Human Rights Law.\" The International Journal of Human Rights, vol. 25, no. 7, 2021, pp. 1189–1210, https://doi.org/10.1080/13642987.2020.1897652.",
+    "doi": "10.1080/13642987.2020.1897652",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Law, MLA 9 with diacritic author names: Taylor & Francis IJHR DOI pattern (10.1080/13642987.2020.*) returns responseCode 100 / HTTP 404; no close title in Crossref."
+  },
+  {
+    "id": "H24",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "[5] H. Nakashima, D. Petrović, and A. Ruiz, \"Probabilistic unit commitment with wind forecast uncertainty using scenario reduction,\" IEEE Trans. Power Syst., vol. 35, no. 2, pp. 1189–1201, Mar. 2020, doi: 10.1109/TPWRS.2019.2938471.",
+    "doi": "10.1109/TPWRS.2019.2938471",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Engineering, IEEE style: IEEE Trans. Power Systems DOI pattern returns responseCode 100 / HTTP 404; Crossref search finds only older, differently titled unit-commitment papers."
+  },
+  {
+    "id": "H25",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "Whitcombe, Daniel, and Priya Raman. 2020. \"Moral Licensing and Corporate Climate Pledges.\" Journal of Business Ethics 167 (4): 701–19. https://doi.org/10.1007/s10551-020-09612-4.",
+    "doi": "10.1007/s10551-020-09612-4",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Business ethics/philosophy, Chicago author-date: Springer J. Bus. Ethics DOI pattern returns responseCode 100 / HTTP 404; no close title in Crossref."
+  },
+  {
+    "id": "H26",
+    "kind": "fake",
+    "category": "nonexistent-doi",
+    "raw": "Delacroix-Hart, M. (2020). Archival silence and the historiography of colonial famine in Bengal. History and Theory, 59(3), 402–421. https://doi.org/10.1111/hith.12987",
+    "doi": "10.1111/hith.12987",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "History/humanities, APA 7: Wiley History and Theory DOI pattern returns responseCode 100 / HTTP 404; no close title in Crossref."
+  },
+  {
+    "id": "H27",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "Kowalczyk, A., & Mensah, N. (2021). Algorithmic sentencing tools and the right to reasons in English criminal law. Oxford Journal of Legal Studies, 41(3), 750–775. https://doi.org/10.1093/ojls/gqaa047",
+    "doi": "10.1093/ojls/gqaa047",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Constitutional Conventions and the Judiciary",
+      "authors": [
+        "Stephenson"
+      ],
+      "year": 2021,
+      "venue": "Oxford Journal of Legal Studies",
+      "doi": "10.1093/ojls/gqaa047"
+    },
+    "note": "Law, APA 7: DOI exists and journal/volume/pages are copied correctly, but it belongs to Stephenson (2021) 'Constitutional Conventions and the Judiciary'; title and authors entirely different."
+  },
+  {
+    "id": "H28",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "Okeke, U., Sørensen, M. and Pillay, R. (2021) 'Night-shift rotation and medication administration errors among intensive care nurses: a multicentre cohort study', International Journal of Nursing Studies, 113, 103786. doi:10.1016/j.ijnurstu.2020.103786.",
+    "doi": "10.1016/j.ijnurstu.2020.103786",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Effectiveness of motivational interviewing in enhancing cancer screening uptake amongst average-risk individuals: A systematic review",
+      "authors": [
+        "Chan",
+        "So"
+      ],
+      "year": 2021,
+      "venue": "International Journal of Nursing Studies",
+      "doi": "10.1016/j.ijnurstu.2020.103786"
+    },
+    "note": "Nursing, Harvard: DOI exists (same journal, vol. 113, article 103786) but is Chan & So (2021) on motivational interviewing for cancer screening; clearly a different paper."
+  },
+  {
+    "id": "H29",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "Ashdown, Peter, and Ryo Tanaka. 2021. \"Railway Access and Literacy in Late-Victorian England.\" Journal of Economic History 81 (2): 481–512. https://doi.org/10.1017/S0022050721000127.",
+    "doi": "10.1017/S0022050721000127",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "More Power to the People: Electricity Adoption, Technological Change, and Labor Conflict",
+      "authors": [
+        "Molinder",
+        "Karlsson",
+        "Enflo"
+      ],
+      "year": 2021,
+      "venue": "The Journal of Economic History",
+      "doi": "10.1017/S0022050721000127"
+    },
+    "note": "Economic history, Chicago author-date: DOI exists with matching journal/volume/pages, but it is Molinder, Karlsson & Enflo (2021) on Swedish electrification and labour conflict."
+  },
+  {
+    "id": "H30",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "[7] E. Brandt and S. Kapoor, \"Distributed voltage regulation in low-voltage feeders with high rooftop PV penetration,\" IEEE Trans. Smart Grid, vol. 11, no. 4, pp. 3201–3211, Jul. 2020, doi: 10.1109/TSG.2020.2971427.",
+    "doi": "10.1109/TSG.2020.2971427",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "A Multi-Agent Reinforcement Learning-Based Data-Driven Method for Home Energy Management",
+      "authors": [
+        "Xu",
+        "Jia",
+        "Xu",
+        "Xu",
+        "Chai",
+        "Lai"
+      ],
+      "year": 2020,
+      "venue": "IEEE Transactions on Smart Grid",
+      "doi": "10.1109/TSG.2020.2971427"
+    },
+    "note": "Engineering, IEEE style: DOI exists in the cited journal/issue/pages but is Xu et al. (2020) on multi-agent RL home energy management; different title and authors."
+  },
+  {
+    "id": "H31",
+    "kind": "fake",
+    "category": "wrong-paper-doi",
+    "raw": "Gunawardena, Sunil, and Tessa Holloway. \"Payments for Ecosystem Services and Smallholder Deforestation in Sumatra.\" Ecological Economics, vol. 159, 2019, pp. 226–34, https://doi.org/10.1016/j.ecolecon.2019.01.014.",
+    "doi": "10.1016/j.ecolecon.2019.01.014",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Market Redirection Leakage in the Palm Oil Market",
+      "authors": [
+        "Wilman"
+      ],
+      "year": 2019,
+      "venue": "Ecological Economics",
+      "doi": "10.1016/j.ecolecon.2019.01.014"
+    },
+    "note": "Environmental economics, MLA 9: DOI exists (Ecological Economics 159:226-234) but is Wilman (2019) 'Market Redirection Leakage in the Palm Oil Market'; topic is adjacent, title and authors differ completely."
+  },
+  {
+    "id": "H32",
+    "kind": "fake",
+    "category": "fabricated-no-doi",
+    "raw": "Nussbaum, Martha C. \"Compassion, Narrative, and the Moral Imagination of Machines.\" Philosophy & Public Affairs, vol. 47, no. 3, 2019, pp. 245–71.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": null,
+    "note": "Philosophy, MLA 9: real author who does publish in this real journal, invented title; no DOI and Crossref search returns only her genuine 1995/2011 PPA papers, no close match, so unconfirmable (amber)."
+  },
+  {
+    "id": "H33",
+    "kind": "fake",
+    "category": "fabricated-no-doi",
+    "raw": "Sunstein, C.R. (2017) 'Nudging tenants: default rules in residential lease law', Yale Law Journal, 126(5), pp. 1402–1448.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": null,
+    "note": "Law, Harvard: real author + real journal, invented title; no DOI and no close Crossref match, so cannot be proven fake."
+  },
+  {
+    "id": "H34",
+    "kind": "fake",
+    "category": "fabricated-no-doi",
+    "raw": "[6] M. Takahashi, R. Albuquerque, and K. Osei, \"Adaptive droop control for hybrid AC/DC microgrids under asymmetric grid faults,\" IEEE Trans. Smart Grid, vol. 11, no. 5, pp. 4012–4024, Sep. 2020.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": null,
+    "note": "Engineering, IEEE style: invented authors and title in a crowded real topic; Crossref returns only differently titled droop-control papers, so no confident match and no DOI to disprove (amber)."
+  },
+  {
+    "id": "H35",
+    "kind": "fake",
+    "category": "fabricated-no-doi",
+    "raw": "Nakamura, H., & Delgado, R. (2018). Riparian buffer width and nitrate attenuation in tropical smallholder catchments: A meta-analysis. Journal of Hydrology, 561, 820–832.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": null,
+    "note": "Environmental science, APA 7: invented paper in a real journal; no DOI and Crossref search finds no close title match."
+  },
+  {
+    "id": "H36",
+    "kind": "fake",
+    "category": "wrong-year-venue",
+    "raw": "Porter, M. E., & van der Linde, C. (1999). Toward a new conception of the environment–competitiveness relationship. American Economic Review, 89(4), 97–118.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Toward a New Conception of the Environment-Competitiveness Relationship",
+      "authors": [
+        "Porter",
+        "Linde"
+      ],
+      "year": 1995,
+      "venue": "Journal of Economic Perspectives",
+      "doi": "10.1257/jep.9.4.97"
+    },
+    "note": "Environmental economics, APA 7: real paper (title/authors exact; registry stores family name 'Linde') but published in Journal of Economic Perspectives 9(4) in 1995, not AER 1999: year off by 4 and wrong journal."
+  },
+  {
+    "id": "H37",
+    "kind": "fake",
+    "category": "wrong-year-venue",
+    "raw": "Ostrom, E. (2013) 'A general framework for analyzing sustainability of social-ecological systems', Science, 325(5939), pp. 419–422. doi:10.1126/science.1172133.",
+    "doi": "10.1126/science.1172133",
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": {
+      "title": "A General Framework for Analyzing Sustainability of Social-Ecological Systems",
+      "authors": [
+        "Ostrom"
+      ],
+      "year": 2009,
+      "venue": "Science",
+      "doi": "10.1126/science.1172133"
+    },
+    "note": "Environmental governance, Harvard: the DOI is correct and resolves to this same paper, but it was published in 2009, not 2013 (year off by 4); same paper with wrong year is amber, not red."
+  },
+  {
+    "id": "H38",
+    "kind": "fake",
+    "category": "wrong-year-venue",
+    "raw": "Mishel, Merle H. 1988. \"Uncertainty in Illness.\" Nursing Research 37 (4): 225–32.",
+    "doi": null,
+    "expected": "check",
+    "expectedFlags": [],
+    "truth": {
+      "title": "Uncertainty in Illness",
+      "authors": [
+        "Mishel"
+      ],
+      "year": 1988,
+      "venue": "Image: the Journal of Nursing Scholarship",
+      "doi": "10.1111/j.1547-5069.1988.tb00082.x"
+    },
+    "note": "Nursing theory, Chicago author-date: real paper and year, but it appeared in Image: the Journal of Nursing Scholarship 20(4):225-232, not Nursing Research (Mishel's other Nursing Research papers have different titles): wrong journal."
+  },
+  {
+    "id": "H39",
+    "kind": "fake",
+    "category": "chimera",
+    "raw": "Piketty, T. (2018). Inheritance flows and the return of patrimonial capitalism in emerging economies. The Quarterly Journal of Economics, 133(4), 1931–1987. https://doi.org/10.1093/qje/qjy047",
+    "doi": "10.1093/qje/qjy047",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Economics, APA 7: real author who has published in QJE + real journal + invented title; the QJE-style DOI returns responseCode 100 / HTTP 404 and Crossref finds no close title."
+  },
+  {
+    "id": "H40",
+    "kind": "fake",
+    "category": "chimera",
+    "raw": "Folke, Carl. \"Biosphere Stewardship and the Governance of Tipping Cascades in Coastal Fisheries.\" Ambio, vol. 50, no. 10, 2021, pp. 1743–55, https://doi.org/10.1007/s13280-021-01673-5.",
+    "doi": "10.1007/s13280-021-01673-5",
+    "expected": "mismatch",
+    "expectedFlags": [],
+    "truth": {
+      "doiExists": false,
+      "doiOrgResponseCode": 100,
+      "httpStatus": 404,
+      "closeTitleMatch": false
+    },
+    "note": "Environmental science, MLA 9: real author who publishes in Ambio + real journal + invented title; the Springer Ambio-style DOI returns responseCode 100 / HTTP 404 (nearest real works: Folke & Kautsky 2021 'Aquaculture and ocean stewardship', a different paper)."
+  }
+]

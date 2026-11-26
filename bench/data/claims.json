@@ -1,0 +1,202 @@
+[
+  {
+    "id": "C01",
+    "doi": "10.1073/pnas.1319030111",
+    "passage": "The effect sizes indicate that on average, student performance on examinations and concept inventories increased by 0.47 SDs under active learning (n = 158 studies), and that the odds ratio for failing was 1.95 under traditional lecturing (n = 67 studies).",
+    "claim": "Freeman and colleagues' meta-analysis found that active learning raised student performance on examinations and concept inventories by 0.47 standard deviations on average, while the odds ratio for failing under traditional lecturing was 1.95.",
+    "quote": null,
+    "expected": "supports",
+    "codeExpectation": null,
+    "note": "Faithful paraphrase; both numbers (0.47, 1.95) appear verbatim in the passage, so a number check must not fire. (Passage text: OpenAlex abstract.)"
+  },
+  {
+    "id": "C02",
+    "doi": "10.1257/aer.91.5.1369",
+    "passage": "In places where Europeans faced high mortality rates, they could not settle and were more likely to set up extractive institutions. These institutions persisted to the present.",
+    "claim": "Acemoglu and colleagues argue that where Europeans faced high mortality rates they could not settle and instead tended to set up extractive institutions, which have persisted to the present.",
+    "quote": null,
+    "expected": "supports",
+    "codeExpectation": null,
+    "note": "Close paraphrase of both sentences with the hedge ('more likely' -> 'tended to') preserved. (Passage text: Crossref and OpenAlex abstract.)"
+  },
+  {
+    "id": "C03",
+    "doi": "10.1126/science.1127647",
+    "passage": "We describe an effective way of initializing the weights that allows deep autoencoder networks to learn low-dimensional codes that work much better than principal components analysis as a tool to reduce the dimensionality of data.",
+    "claim": "Hinton and Salakhutdinov describe a weight-initialization method that lets deep autoencoder networks learn low-dimensional codes that work much better than principal components analysis for reducing the dimensionality of data.",
+    "quote": null,
+    "expected": "supports",
+    "codeExpectation": null,
+    "note": "Direct paraphrase of the passage's main result. (Passage text: Crossref and OpenAlex abstract.)"
+  },
+  {
+    "id": "C04",
+    "doi": "10.1056/NEJMoa2034577",
+    "passage": "There were 8 cases of Covid-19 with onset at least 7 days after the second dose among participants assigned to receive BNT162b2 and 162 cases among those assigned to placebo; BNT162b2 was 95% effective in preventing Covid-19 (95% credible interval, 90.3 to 97.6).",
+    "claim": "In the pivotal trial reported by Polack et al., BNT162b2 was 95% effective in preventing Covid-19, with 8 cases in the vaccine group versus 162 in the placebo group.",
+    "quote": null,
+    "expected": "supports",
+    "codeExpectation": null,
+    "note": "All figures (95%, 8, 162) match the passage exactly; correct paraphrase. (Passage text: OpenAlex abstract.)"
+  },
+  {
+    "id": "C05",
+    "doi": "10.1126/science.aap9559",
+    "passage": "Contrary to conventional wisdom, robots accelerated the spread of true and false news at the same rate, implying that false news spreads more than the truth because humans, not robots, are more likely to spread it.",
+    "claim": "Vosoughi and colleagues found that bots accelerated the spread of true and false news at the same rate, implying that humans rather than bots are responsible for false news spreading more than the truth.",
+    "quote": null,
+    "expected": "supports",
+    "codeExpectation": null,
+    "note": "Faithful paraphrase ('robots' -> 'bots'). (Passage text: OpenAlex abstract.)"
+  },
+  {
+    "id": "C06",
+    "doi": "10.3102/003465430298487",
+    "passage": "This evidence shows that although feedback is among the major influences, the type of feedback and the way it is given can be differentially effective.",
+    "claim": "Hattie and Timperley conclude that although feedback is among the major influences on learning, \"the type of feedback and the way it is given can be differentially effective.\"",
+    "quote": "the type of feedback and the way it is given can be differentially effective",
+    "expected": "supports",
+    "codeExpectation": null,
+    "note": "Supported claim with a verbatim quote; a quote check must find it in the source. (Passage text: Crossref and OpenAlex abstract.)"
+  },
+  {
+    "id": "C07",
+    "doi": "10.1371/journal.pone.0069841",
+    "passage": "Our results indicate that Facebook use predicts negative shifts on both of these variables over time. The more people used Facebook at one time point, the worse they felt the next time we text-messaged them; the more they used Facebook over two-weeks, the more their life satisfaction levels declined over time.",
+    "claim": "Kross and colleagues proved that using Facebook causes young adults' moment-to-moment well-being and life satisfaction to decline.",
+    "quote": null,
+    "expected": "partly",
+    "codeExpectation": null,
+    "note": "Direction matches, but the source reports that Facebook use 'predicts' declines; the claim upgrades this to proven causation. (Passage text: OpenAlex abstract.)"
+  },
+  {
+    "id": "C08",
+    "doi": "10.1162/neco.1997.9.8.1735",
+    "passage": "In comparisons with real-time recurrent learning, back propagation through time, recurrent cascade correlation, Elman nets, and neural sequence chunking, LSTM leads to many more successful runs, and learns much faster.",
+    "claim": "Hochreiter and Schmidhuber showed that LSTM outperforms every other recurrent neural network method on all sequence-learning tasks.",
+    "quote": null,
+    "expected": "partly",
+    "codeExpectation": null,
+    "note": "The passage supports LSTM beating five named methods in the authors' experiments; 'every other method on all tasks' overgeneralises. (Passage text: Crossref and OpenAlex abstract.)"
+  },
+  {
+    "id": "C09",
+    "doi": "10.1126/science.185.4157.1124",
+    "passage": "These heuristics are highly economical and usually effective, but they lead to systematic and predictable errors.",
+    "claim": "Tversky and Kahneman showed that judgment heuristics lead to systematic and predictable errors, and that statistical training eliminates these biases.",
+    "quote": null,
+    "expected": "partly",
+    "codeExpectation": null,
+    "note": "First half is stated; the second half (statistical training eliminates the biases) is not in the passage, and the claim drops 'usually effective'. (Passage text: Crossref and OpenAlex abstract.)"
+  },
+  {
+    "id": "C10",
+    "doi": "10.1056/NEJMoa2007764",
+    "passage": "Our data show that remdesivir was superior to placebo in shortening the time to recovery in adults who were hospitalized with Covid-19 and had evidence of lower respiratory tract infection.",
+    "claim": "Remdesivir shortens recovery time for people with Covid-19, including mild cases that do not need hospital care.",
+    "quote": null,
+    "expected": "partly",
+    "codeExpectation": null,
+    "note": "Supported only for hospitalized adults with lower respiratory tract infection; extending it to mild, non-hospitalized cases drops that qualifier. (Passage text: OpenAlex abstract.)"
+  },
+  {
+    "id": "C11",
+    "doi": "10.1257/aer.91.5.1369",
+    "passage": "We exploit differences in European mortality rates to estimate the effect of institutions on economic performance.",
+    "claim": "Acemoglu and colleagues show that foreign aid fails to improve institutions in former colonies.",
+    "quote": null,
+    "expected": "says_nothing",
+    "codeExpectation": null,
+    "note": "Same topic (institutions, colonies) but the passage says nothing about foreign aid. (Passage text: Crossref and OpenAlex abstract.)"
+  },
+  {
+    "id": "C12",
+    "doi": "10.1038/s41586-020-2649-2",
+    "passage": "NumPy is the primary array programming library for the Python language. It has an essential role in research analysis pipelines in fields as diverse as physics, chemistry, astronomy, geoscience, biology, psychology, materials science, engineering, finance and economics.",
+    "claim": "Harris and colleagues report that NumPy runs numerical computations faster than MATLAB or R.",
+    "quote": null,
+    "expected": "says_nothing",
+    "codeExpectation": null,
+    "note": "The passage describes NumPy's role but makes no performance comparison with other tools. (Passage text: Crossref and OpenAlex abstract.)"
+  },
+  {
+    "id": "C13",
+    "doi": "10.1257/jep.31.2.211",
+    "passage": "Following the 2016 US presidential election, many have expressed concern about the effects of false stories (“fake news”), circulated largely through social media. We discuss the economics of fake news and present new data on its consumption prior to the election.",
+    "claim": "Allcott and Gentzkow concluded that fake news circulated on social media swung the outcome of the 2016 US presidential election.",
+    "quote": null,
+    "expected": "says_nothing",
+    "codeExpectation": null,
+    "note": "The passage only states that concern exists and that the paper presents consumption data; it draws no conclusion about the election outcome. (Passage text: Crossref and OpenAlex abstract.)"
+  },
+  {
+    "id": "C14",
+    "doi": "10.1073/pnas.79.8.2554",
+    "passage": "The collective properties of this model produce a content-addressable memory which correctly yields an entire memory from any subpart of sufficient size.",
+    "claim": "Hopfield showed that his network, trained with backpropagation, could classify handwritten digits.",
+    "quote": null,
+    "expected": "says_nothing",
+    "codeExpectation": null,
+    "note": "Topic-related (neural networks) but the passage concerns content-addressable memory, not backpropagation or digit classification. (Passage text: Crossref and OpenAlex abstract.)"
+  },
+  {
+    "id": "C15",
+    "doi": "10.1126/science.aap9559",
+    "passage": "Falsehood diffused significantly farther, faster, deeper, and more broadly than the truth in all categories of information, and the effects were more pronounced for false political news than for false news about terrorism, natural disasters, science, urban legends, or financial information.",
+    "claim": "Vosoughi and colleagues found that true stories spread farther and faster on Twitter than false ones.",
+    "quote": null,
+    "expected": "opposite",
+    "codeExpectation": null,
+    "note": "Reverses the finding: falsehood, not truth, diffused farther and faster. (Passage text: OpenAlex abstract.)"
+  },
+  {
+    "id": "C16",
+    "doi": "10.1126/science.aac4716",
+    "passage": "Replication effects were half the magnitude of original effects, representing a substantial decline.",
+    "claim": "The Open Science Collaboration found that replication effects were about as large as the original effects.",
+    "quote": null,
+    "expected": "opposite",
+    "codeExpectation": null,
+    "note": "The source reports a substantial decline (half the magnitude), contradicting 'about as large'. (Passage text: OpenAlex abstract.)"
+  },
+  {
+    "id": "C17",
+    "doi": "10.1371/journal.pone.0069841",
+    "passage": "Interacting with other people \"directly\" did not predict these negative outcomes.",
+    "claim": "Kross and colleagues found that interacting with other people directly predicted the same negative outcomes as Facebook use.",
+    "quote": null,
+    "expected": "opposite",
+    "codeExpectation": null,
+    "note": "The passage explicitly says direct interaction did not predict the negative outcomes. (Passage text: OpenAlex abstract.)"
+  },
+  {
+    "id": "C18",
+    "doi": "10.3102/003465430298487",
+    "passage": "Feedback is one of the most powerful influences on learning and achievement, but this impact can be either positive or negative.",
+    "claim": "Hattie and Timperley describe feedback as \"the single most powerful influence on learning and achievement,\" although they note its impact can be either positive or negative.",
+    "quote": "the single most powerful influence on learning and achievement",
+    "expected": "partly",
+    "codeExpectation": "quote_not_in_source",
+    "note": "Misquote: the source says 'one of the most powerful influences', so the quoted string is absent from the source and overstates it; the second clause is supported. (Passage text: Crossref and OpenAlex abstract.)"
+  },
+  {
+    "id": "C19",
+    "doi": "10.1073/pnas.1319030111",
+    "passage": "These results indicate that average examination scores improved by about 6% in active learning sections, and that students in classes with traditional lecturing were 1.5 times more likely to fail than were students in classes with active learning.",
+    "claim": "Freeman and colleagues report that active learning raised average examination scores by about 12%, and that students in traditional lecture classes were 1.5 times more likely to fail.",
+    "quote": null,
+    "expected": "partly",
+    "codeExpectation": "number_not_in_source",
+    "note": "The 1.5x failure figure is correct but the score gain is changed from about 6% to 12%; '12' does not occur in the passage. (Passage text: OpenAlex abstract.)"
+  },
+  {
+    "id": "C20",
+    "doi": "10.1126/science.aap9559",
+    "passage": "We investigated the differential diffusion of all of the verified true and false news stories distributed on Twitter from 2006 to 2017. The data comprise ~126,000 stories tweeted by ~3 million people more than 4.5 million times.",
+    "claim": "Vosoughi and colleagues studied the diffusion of roughly 126,000 verified true and false news stories distributed on Twitter from 2006 to 2020.",
+    "quote": null,
+    "expected": "partly",
+    "codeExpectation": "year_not_in_source",
+    "note": "Dataset description is right except the end year (2017 changed to 2020); 2020 does not occur in the passage. (Passage text: OpenAlex abstract.)"
+  }
+]

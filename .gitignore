@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# knowlix
+/.data/
+/test-results/
+/playwright-report/
+/bench/results/*.json
+!/bench/results/.gitkeep
+.env*.local
+# design scratch work (screenshots, probes, logs); the direction brief is kept
+/.impeccable/*
+!/.impeccable/surfaces/
+/bench/.cache*/
+/public/pdf.worker.min.mjs

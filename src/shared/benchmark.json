@@ -1,0 +1,49 @@
+{
+  "tuning": {
+    "ranAt": "2026-11-26T03:13:59.169Z",
+    "total": 60,
+    "exactLabelAccuracy": 1,
+    "fakesNotVerified": "30/30",
+    "fakesProvenRed": "19/19 expected red",
+    "realCorrect": "30/30",
+    "realWronglyRed": 0,
+    "flagAccuracy": 1,
+    "medianMs": 5029,
+    "items": 60,
+    "real": 30,
+    "fake": 30,
+    "fakesCaught": 30,
+    "exactCorrect": 60
+  },
+  "holdout": {
+    "ranAt": "2026-11-26T03:11:48.126Z",
+    "total": 40,
+    "exactLabelAccuracy": 1,
+    "fakesNotVerified": "20/20",
+    "fakesProvenRed": "13/13 expected red",
+    "realCorrect": "20/20",
+    "realWronglyRed": 0,
+    "flagAccuracy": 1,
+    "medianMs": 4517,
+    "items": 40,
+    "real": 20,
+    "fake": 20,
+    "fakesCaught": 20,
+    "exactCorrect": 40
+  },
+  "claims": {
+    "ranAt": "2026-11-26T03:20:38.747Z",
+    "items": 20,
+    "plantedErrors": 3,
+    "plantedCaught": 3,
+    "cleanItems": 17,
+    "falseAlarms": 0,
+    "judge": {
+      "model": "qwen2.5:7b (ollama)",
+      "exact": 15,
+      "of": 20,
+      "unsupportedNotVerified": "12/14",
+      "supportedVerified": "5/6"
+    }
+  }
+}
